@@ -16,10 +16,9 @@ body{font-family:"Libre Franklin",sans-serif}
 canvas{display:block;width:100%;height:100%}
 #fade{position:absolute;inset:0;z-index:30;background:#213545;pointer-events:none;opacity:1;transition:opacity 3s ease}
 #sealIntro{position:absolute;inset:0;z-index:35;display:grid;place-items:center;pointer-events:none}
-#sealIntro .mark{display:flex;flex-direction:column;align-items:center;gap:16px;opacity:0;transform:scale(.86);
-animation:sealLife 6s ease forwards}
-#sealIntro img{width:min(68vw,390px);height:auto;border-radius:0;object-fit:contain;box-shadow:none;filter:none}
-#sealIntro span{font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;color:#efe7d3;margin-top:-6px}
+#sealIntro .mark{width:min(82vw,460px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;opacity:0;transform:scale(.86);animation:sealLife 6s ease forwards;text-align:center;margin:0 auto}
+#sealIntro img{display:block;width:min(66vw,330px);height:auto;object-fit:contain;margin:0 auto;box-shadow:none;filter:none;background:transparent}
+#sealIntro span{display:block;width:100%;margin:0 auto;text-align:center;font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;color:#efe7d3;padding-left:.38em}
 @keyframes sealLife{0%{opacity:0;transform:scale(.86)}18%{opacity:1;transform:scale(1)}64%{opacity:1}100%{opacity:0;transform:scale(.96)}}
 #curtain{position:absolute;inset:0;z-index:20;pointer-events:none;background:
 radial-gradient(circle at 50% 46%,transparent 0 34%,rgba(8,10,11,.12) 62%,rgba(2,3,4,.55) 100%)}
@@ -63,16 +62,67 @@ opacity:0;pointer-events:none;transition:.28s ease}
 @media(prefers-reduced-motion:reduce){
   #sealIntro{display:none}#fade{opacity:0!important}.top,.bottom,#hint{opacity:1!important;transform:none!important}
 }
+
+#galleryFallback{position:absolute;inset:0;z-index:0;overflow:hidden;background:#ddd3be;perspective:850px}
+#galleryFallback .fb-ceiling{position:absolute;left:18%;right:18%;top:0;height:32%;background:linear-gradient(#eee5d2,#d6c8b0);
+clip-path:polygon(22% 0,78% 0,100% 100%,0 100%)}
+#galleryFallback .fb-floor{position:absolute;left:10%;right:10%;bottom:0;height:48%;background:
+repeating-linear-gradient(105deg,#6a4933 0 8px,#76523a 8px 16px,#60412e 16px 24px);
+clip-path:polygon(28% 0,72% 0,100% 100%,0 100%)}
+#galleryFallback .fb-left,#galleryFallback .fb-right{position:absolute;top:0;bottom:0;width:42%;background:
+linear-gradient(#e6dcc7 0 68%,#6a303c 68% 100%)}
+#galleryFallback .fb-left{left:0;clip-path:polygon(0 0,100% 27%,72% 100%,0 100%)}
+#galleryFallback .fb-right{right:0;clip-path:polygon(0 27%,100% 0,100% 100%,28% 100%)}
+#galleryFallback .fb-end{position:absolute;left:36%;right:36%;top:25%;bottom:28%;background:#213545;
+display:grid;place-items:center;box-shadow:0 0 0 9px rgba(184,147,95,.65)}
+#galleryFallback .fb-end img{width:86%;height:auto;object-fit:contain}
+canvas{position:absolute;inset:0;z-index:1}
+
+
+#galleryFallback{background:#e5dccb!important}
+#galleryFallback::before{
+  content:"";position:absolute;left:23%;right:23%;top:2%;height:19%;
+  background:
+    linear-gradient(90deg,transparent 0 7%,rgba(118,111,99,.45) 7% 9%,transparent 9% 24%,rgba(118,111,99,.45) 24% 26%,transparent 26% 41%,rgba(118,111,99,.45) 41% 43%,transparent 43% 58%,rgba(118,111,99,.45) 58% 60%,transparent 60% 75%,rgba(118,111,99,.45) 75% 77%,transparent 77%),
+    linear-gradient(rgba(255,255,255,.92),rgba(232,228,216,.88));
+  clip-path:polygon(16% 0,84% 0,100% 100%,0 100%);
+  box-shadow:0 12px 28px rgba(0,0,0,.08)
+}
+#galleryFallback .fb-left::before,#galleryFallback .fb-right::before{
+  content:"";position:absolute;top:33%;width:31%;height:23%;
+  background:
+    linear-gradient(#f5f1e7,#f5f1e7) padding-box,
+    linear-gradient(135deg,#b48a4e,#3d2a20) border-box;
+  border:10px solid transparent;box-shadow:0 8px 20px rgba(0,0,0,.2)
+}
+#galleryFallback .fb-left::before{right:20%}
+#galleryFallback .fb-right::before{left:20%}
+#galleryFallback .fb-left::after,#galleryFallback .fb-right::after{
+  content:"";position:absolute;top:63%;width:24%;height:17%;
+  background:#8d6d58;border:7px solid #3d2a20;box-shadow:0 6px 16px rgba(0,0,0,.18)
+}
+#galleryFallback .fb-left::after{right:10%}
+#galleryFallback .fb-right::after{left:10%}
+
 </style>
 </head>
 <body>
 <main id="stage">
+
+  <div id="galleryFallback" aria-hidden="true">
+    <div class="fb-ceiling"></div>
+    <div class="fb-left"></div>
+    <div class="fb-right"></div>
+    <div class="fb-floor"></div>
+    <div class="fb-end"><img src="vm-seal-clean-transparent-v4.png" alt=""></div>
+  </div>
+
   <div id="fade"></div>
-  <div id="sealIntro"><div class="mark"><img src="vm-seal-transparent.png" alt="VM seal"><span>Art Studio</span></div></div>
+  <div id="sealIntro"><div class="mark"><img src="vm-seal-clean-transparent-v4.png" alt="VM seal"><span>Art Studio</span></div></div>
   <div id="curtain"></div>
   <div id="ui">
     <div class="top" id="topUI">
-      <a class="logo" href="index.html"><img src="vm-seal-transparent.png" alt="V. Murphy Art Studio"></a>
+      <a class="logo" href="index.html"><img src="vm-seal-clean-transparent-v4.png" alt="V. Murphy Art Studio"></a>
       <a class="menu" href="collection.html">Enter Gallery</a>
     </div>
     <div class="bottom" id="bottomUI">
@@ -99,12 +149,28 @@ opacity:0;pointer-events:none;transition:.28s ease}
   </section>
 </main>
 
+
+<script>
+(function(){
+  const fade=document.getElementById('fade');
+  const intro=document.getElementById('sealIntro');
+  setTimeout(()=>{ if(fade) fade.style.opacity='0'; }, 2800);
+  setTimeout(()=>{ if(intro) intro.style.display='none'; }, 6500);
+  // If 3D fails, reveal the fallback UI after the cinematic intro.
+  setTimeout(()=>{
+    document.getElementById('topUI')?.classList.add('visible');
+    document.getElementById('bottomUI')?.classList.add('visible');
+    document.getElementById('hint')?.classList.add('visible');
+  }, 22000);
+})();
+</script>
+
 <script type="module">
-import * as THREE from 'https://unpkg.com/three@0.170.0/build/three.module.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js';
 
 const stage=document.getElementById('stage');
 const scene=new THREE.Scene();
-scene.background=new THREE.Color(0x1d2020);
+scene.background=new THREE.Color(0x213545);
 scene.fog=new THREE.Fog(0xe7dcc5,24,62);
 
 const camera=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,.1,120);
@@ -201,7 +267,7 @@ for(const x of [-3.6,3.6]){
 // Central navy feature panel with the exact approved staggered VM seal.
 const featurePanelMat=new THREE.MeshStandardMaterial({color:0x213545,roughness:.82});
 box(4.15,4.45,.16,featurePanelMat,0,2.55,-48.72);
-const vmTex=loader.load('vm-seal-transparent.png');
+const vmTex=loader.load('vm-seal-clean-transparent-v4.png');
 vmTex.colorSpace=THREE.SRGBColorSpace;
 const vmSealWall=new THREE.Mesh(
   new THREE.PlaneGeometry(3.45,2.25),
@@ -229,7 +295,6 @@ const labelMesh=new THREE.Mesh(
 labelMesh.position.set(0,1.52,-48.59);
 root.add(labelMesh);
 
-const loader=new THREE.TextureLoader();
 const ART=[
  {file:'courtyard-cafe.jpeg',title:'Courtyard Café'},
  {file:'blue-awnings.jpeg',title:'Blue Awnings'},
@@ -353,6 +418,12 @@ function animate(now){
    document.getElementById('hint').classList.add('visible');
  }
  renderer.render(scene,camera);
+ const fb=document.getElementById('galleryFallback');
+ if(fb && !fb.dataset.hiddenBy3d){
+   fb.dataset.hiddenBy3d='1';
+   fb.style.transition='opacity .8s ease';
+   setTimeout(()=>{fb.style.opacity='0';},120);
+ }
 }
 requestAnimationFrame(animate);
 
