@@ -1,0 +1,944 @@
+
+:root{--ink:#17384b;--ink2:#0b2634;--cream:#f4ead5;--parchment:#e6d2aa;--gold:#c4a565;--olive:#707854;--taupe:#b6a38a;--white:#fffdf8;--serif:"Cormorant Garamond",Georgia,serif;--sans:"Libre Franklin",Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink2);font-family:var(--sans);font-weight:300;line-height:1.65}img{display:block;max-width:100%}a{text-decoration:none;color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:.98;letter-spacing:-.025em;margin:0 0 1rem}h1{font-size:clamp(3.2rem,7.5vw,7.1rem)}h2{font-size:clamp(2.35rem,4.7vw,4.5rem)}h3{font-size:1.75rem}p{margin:0 0 1.15rem}strong{font-weight:600}
+.content-width{width:min(1180px,calc(100% - 40px));margin:auto}.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-weight:600;font-size:.72rem;margin-bottom:1rem}.eyebrow.dark{color:var(--ink)}.lead{font-size:clamp(1.05rem,1.8vw,1.32rem);max-width:780px}.actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.6rem}
+.button{display:inline-flex;align-items:center;justify-content:center;padding:.92rem 1.25rem;border-radius:999px;border:1px solid currentColor;font-weight:500;transition:.2s}.button.primary{background:rgba(23,56,75,.94);color:#fff;border-color:transparent}.button.primary:hover{background:var(--ink2)}.button.ghost{color:white;border-color:rgba(255,255,255,.78);background:rgba(255,255,255,.06);backdrop-filter:blur(5px)}.button.outline{background:transparent;color:var(--ink);border-color:var(--ink)}.text-link{font-weight:600;border-bottom:1px solid currentColor}
+.site-header{position:sticky;top:0;z-index:60;height:80px;padding:0 clamp(18px,4vw,52px);display:flex;align-items:center;justify-content:space-between;background:rgba(244,234,213,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(23,56,75,.12)}.brand{display:flex;align-items:center;gap:.75rem;font-family:var(--serif);font-weight:700;font-size:1.25rem}.brand img{width:50px;height:50px;object-fit:cover;border-radius:50%;border:1px solid rgba(23,56,75,.25);background:var(--cream)}.nav{display:flex;gap:1.05rem;align-items:center;font-size:.8rem;font-weight:500}.nav a{white-space:nowrap}.menu-toggle{display:none;background:transparent;border:1px solid var(--ink);border-radius:999px;padding:.46rem .8rem;color:var(--ink)}
+.home-hero{height:calc(100svh - 80px);min-height:650px;position:relative;overflow:hidden;color:white;display:flex;align-items:center}.hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;animation:crossfade 21s infinite}.slide-one{background-image:url("courtyard-cafe.jpeg");animation-delay:0s}.slide-two{background-image:url("blue-awnings.jpeg");animation-delay:7s}.slide-three{background-image:url("village-garden-2013.jpeg");animation-delay:14s}@keyframes crossfade{0%{opacity:0;transform:scale(1.01)}7%{opacity:1}28%{opacity:1;transform:scale(1.055)}38%{opacity:0}100%{opacity:0}}.hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,21,29,.76),rgba(5,21,29,.28) 62%,rgba(5,21,29,.12))}.hero-content{position:relative;z-index:2;width:min(930px,calc(100% - 40px));margin-left:max(20px,7vw);text-shadow:0 2px 18px rgba(0,0,0,.42)}.hero-caption{position:absolute;right:22px;bottom:18px;z-index:2;text-transform:uppercase;letter-spacing:.1em;font-size:.7rem;color:rgba(255,255,255,.8)}
+.warm-band{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--cream),var(--parchment));padding:8rem 0}.home-copy{position:relative;z-index:2;max-width:790px;margin-left:max(20px,10vw)}.floating-art{position:absolute;overflow:hidden;opacity:.14;filter:saturate(.72);box-shadow:0 24px 70px rgba(23,56,75,.16)}.floating-art img{width:100%;height:100%;object-fit:cover}.art-a{width:330px;height:445px;right:4%;top:6%;transform:rotate(3deg)}.art-b{width:270px;height:190px;right:23%;bottom:-2%;transform:rotate(-5deg)}
+.service-portals{padding:5rem 0;display:grid;grid-template-columns:repeat(2,1fr);gap:1px}.portal-card{min-height:430px;padding:2.4rem;display:flex;flex-direction:column;justify-content:flex-end;color:white;position:relative;background-size:cover;background-position:center;overflow:hidden}.portal-card:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,38,53,.03),rgba(12,38,53,.9));z-index:0}.portal-card>*{position:relative;z-index:1}.original-card{background-image:url("courtyard-cafe.jpeg")}.shop-card{background-image:url("https://images.unsplash.com/photo-1561214115-f2f134cc4912?q=80&w=1400&auto=format&fit=crop")}.create-card{background-image:url("https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=1400&auto=format&fit=crop")}.trade-card{background-image:url("https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?q=80&w=1400&auto=format&fit=crop")}
+.difference-band{padding:7rem 0;background:var(--ink);color:white;position:relative;overflow:hidden}.difference-band:after{content:"";position:absolute;right:-4%;top:-25%;width:35%;height:150%;background:url("red-composition.jpeg") center/cover;opacity:.06;transform:rotate(7deg)}.difference-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:5rem;position:relative;z-index:1}.difference-copy{font-size:1.08rem}.editorial-strip{display:grid;grid-template-columns:44% 56%;min-height:600px;background:linear-gradient(135deg,var(--parchment),var(--cream))}.editorial-photo{background-size:cover;background-position:center;opacity:.32;margin:4rem 0 4rem 5vw}.editorial-copy{padding:7rem 8vw 7rem 6vw;align-self:center}
+.bg-studio{background-image:url("https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=1800&auto=format&fit=crop")}.bg-painter{background-image:url("https://images.unsplash.com/photo-1541961017774-22349e4a1262?q=80&w=1500&auto=format&fit=crop")}.bg-gallery{background-image:url("https://images.unsplash.com/photo-1561214115-f2f134cc4912?q=80&w=1800&auto=format&fit=crop")}.bg-frames{background-image:url("https://images.unsplash.com/photo-1564399579883-451a5d44ec08?q=80&w=1800&auto=format&fit=crop")}.bg-paper{background-image:url("https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=1800&auto=format&fit=crop")}.bg-digital{background-image:url("https://images.unsplash.com/photo-1580136579312-94651dfd596d?q=80&w=1800&auto=format&fit=crop")}.bg-contact{background-image:url("https://images.unsplash.com/photo-1515405295579-ba7b45403062?q=80&w=1800&auto=format&fit=crop")}.bg-create{background-image:url("https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=1800&auto=format&fit=crop")}.bg-personal{background-image:url("https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=1800&auto=format&fit=crop")}.bg-hospitality{background-image:url("https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?q=80&w=1800&auto=format&fit=crop")}
+.page-hero{min-height:520px;position:relative;display:flex;align-items:flex-end;color:white;overflow:hidden}.page-hero.compact{min-height:430px}.page-image{position:absolute;inset:0;background-size:cover;background-position:center}.page-image:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,29,39,.8),rgba(8,29,39,.22))}.page-hero-copy{position:relative;z-index:1;width:min(940px,calc(100% - 40px));margin:0 0 4rem max(20px,7vw);text-shadow:0 2px 15px rgba(0,0,0,.4)}
+.split-section,.edition-rule,.trade-visual,.canvas-section,.contact-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(2rem,6vw,6rem);align-items:center;padding:7rem 0}.side-visual{min-height:520px;background-size:cover;background-position:center;opacity:.3;box-shadow:0 25px 75px rgba(23,56,75,.13)}.transparent-copy{background:transparent}.text-over-art{min-height:650px;display:grid;grid-template-columns:1.1fr .9fr;background:var(--ink)}.statement-image{position:relative;overflow:hidden}.statement-image img{width:100%;height:100%;object-fit:cover;opacity:.7}.statement-image:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(23,56,75,.7))}.statement-copy{color:white;padding:8vw 7vw;display:flex;flex-direction:column;justify-content:center;background:transparent}.small-band{padding:3rem 0;background:var(--ink);color:white;text-align:center}
+.collection-note{padding:3rem 0 0;display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}.collection-note>div{border-top:1px solid rgba(23,56,75,.25);padding-top:1rem}.collection-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;padding:4rem 0 6rem}.art-card{position:relative;min-height:610px;overflow:hidden;background:var(--ink)}.art-card.wide{grid-column:1/-1;min-height:520px}.art-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:.45s}.art-card:hover img{transform:scale(1.025)}.art-overlay{position:absolute;inset:auto 0 0;padding:4rem 2rem 2rem;color:white;background:linear-gradient(transparent,rgba(10,32,43,.92));text-shadow:0 1px 10px rgba(0,0,0,.3)}.art-overlay span{font-size:.7rem;text-transform:uppercase;letter-spacing:.16em}.art-overlay h2{font-size:2.7rem;margin:.4rem 0}.art-overlay small{font-family:var(--sans);font-size:.85rem}
+.service-list{display:grid;grid-template-columns:repeat(2,1fr);gap:0 5rem;padding:6rem 0}.service-list article{position:relative;padding:2rem 0;border-top:1px solid rgba(23,56,75,.24)}.service-list article>span{position:absolute;right:0;top:1.2rem;font-family:var(--serif);font-size:3rem;opacity:.13}.service-list h2{font-size:2.4rem}
+.frame-section{padding:7rem 0;background:var(--ink);color:white;position:relative;overflow:hidden}.frame-section:after{content:"";position:absolute;right:-8%;top:10%;width:33%;height:80%;background:url("https://images.unsplash.com/photo-1561214115-f2f134cc4912?q=80&w=900&auto=format&fit=crop") center/cover;opacity:.07}.frame-section .content-width{position:relative;z-index:1}.section-lead{max-width:790px}.frame-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.4rem;margin-top:3rem}.frame-option h3{font-size:1.32rem;margin-top:.9rem;margin-bottom:.25rem}.frame-option p{font-size:.82rem;opacity:.72}.frame-sample{height:175px;padding:18px;box-shadow:0 12px 35px rgba(0,0,0,.18)}.frame-sample span{display:block;width:100%;height:100%;background:linear-gradient(135deg,#eee0c8,#f9f0dd);border:12px solid rgba(255,255,255,.86)}
+.oak{background:linear-gradient(90deg,#c79a5c,#e2bd7b,#bf8b4f)}.walnut{background:linear-gradient(90deg,#4a2c1e,#76503a,#3c2418)}.blackash{background:linear-gradient(90deg,#171717,#454545,#111)}.whitewood{background:linear-gradient(90deg,#eeeae2,#fff,#dcd5c8)}.distressed{background:repeating-linear-gradient(90deg,#efe9dd 0 10px,#c9bdab 10px 12px,#faf7ef 12px 23px)}.reclaimed{background:repeating-linear-gradient(90deg,#6a4c32 0 16px,#8f6c45 16px 19px,#523a27 19px 34px)}.maple{background:linear-gradient(90deg,#e4c696,#f0d7ae,#d8b77d)}.gold{background:linear-gradient(90deg,#8b6b2e,#d8b86a,#9f7b36)}.chrome{background:linear-gradient(90deg,#999,#f4f4f4,#777,#ddd)}.charcoal{background:linear-gradient(90deg,#2a2f33,#596169,#202428)}
+.canvas-options{display:grid;grid-template-columns:repeat(2,1fr);gap:1.3rem;margin-top:2rem}.canvas-options div{border-top:1px solid rgba(23,56,75,.25);padding-top:1rem}.canvas-options strong,.canvas-options span{display:block}.canvas-options span{font-size:.9rem;color:#445c68}.canvas-wall{background:linear-gradient(135deg,#d8cebe,#f0eadf);min-height:520px;position:relative;overflow:hidden;box-shadow:inset 0 0 60px rgba(23,56,75,.1)}.canvas-piece{position:absolute;box-shadow:12px 14px 25px rgba(0,0,0,.22)}.canvas-piece img{width:100%;height:100%;object-fit:cover}.depth-20{width:35%;height:42%;left:8%;top:15%;transform:rotate(-2deg)}.depth-30{width:38%;height:50%;left:38%;top:30%;transform:rotate(2deg)}.depth-40{width:29%;height:28%;right:5%;top:9%;transform:rotate(-1deg)}
+.download-section{display:grid;grid-template-columns:42% 58%;min-height:610px;background:linear-gradient(135deg,var(--ink),#274e60);color:white}.download-photo{background-size:cover;background-position:center;opacity:.23;margin:4rem 0 4rem 6vw}.download-copy{padding:7rem 8vw 7rem 6vw;align-self:center}
+.edition-rule{grid-template-columns:1.15fr .85fr}.configurator-section{padding:7rem 0;background:linear-gradient(135deg,var(--parchment),var(--cream));position:relative;overflow:hidden}.configurator-section:after{content:"";position:absolute;right:-5%;bottom:-20%;width:33%;height:70%;background:url("red-composition.jpeg") center/cover;opacity:.07;transform:rotate(-7deg)}.configurator-section .content-width{position:relative;z-index:1}.configurator{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem 1.4rem;margin-top:2.5rem;max-width:940px}.configurator label{display:flex;flex-direction:column;gap:.45rem}.configurator label>span{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;font-weight:600}.configurator select,.configurator input{width:100%;padding:1rem;border:1px solid rgba(23,56,75,.25);background:rgba(255,255,255,.24);font:inherit;color:var(--ink2);outline:none}.configurator .full{grid-column:1/-1}.configurator button{justify-self:start;margin-top:.5rem}.brief-output{margin-top:3rem;padding:2rem;border-top:1px solid rgba(23,56,75,.25);border-bottom:1px solid rgba(23,56,75,.25);max-width:940px;background:transparent}
+.process-section{padding:6rem 0;display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}.process-step{border-top:1px solid rgba(23,56,75,.25);padding-top:1.3rem}.process-step>span{font-family:var(--serif);font-size:3.2rem;opacity:.16}.photo-to-art{display:grid;grid-template-columns:44% 56%;min-height:620px;background:var(--ink);color:white}.photo-to-art-image{background-size:cover;background-position:center;opacity:.27;margin:4rem 0 4rem 5vw}.photo-to-art-copy{padding:7rem 8vw 7rem 6vw;align-self:center}.rights-section{padding:7rem 0;display:grid;grid-template-columns:.8fr 1.2fr;gap:5rem}.rights-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}.rights-grid article{border-top:1px solid rgba(23,56,75,.25);padding-top:1rem}
+.trade-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;padding:6rem 0}.trade-grid article{padding:2.5rem;background:rgba(255,255,255,.16);border:1px solid rgba(23,56,75,.09)}.trade-grid h2{font-size:2.55rem}.licensing-section{padding:7rem 0;background:var(--ink);color:white;position:relative;overflow:hidden}.licensing-section:after{content:"";position:absolute;left:-8%;top:-20%;width:36%;height:140%;background:url("courtyard-cafe.jpeg") center/cover;opacity:.055;transform:rotate(5deg)}.licensing-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:5rem;position:relative;z-index:1}.licence-cards article{border-top:1px solid rgba(255,255,255,.24);padding:1.25rem 0}
+.faq-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:5rem;padding:6rem 0}.faq-photo{background-size:cover;background-position:center;min-height:720px;opacity:.23}.faq-list details{border-bottom:1px solid rgba(23,56,75,.24);padding:1.25rem 0}.faq-list summary{font-family:var(--serif);font-size:1.7rem;font-weight:600;cursor:pointer}.faq-list p{padding-top:.8rem}.contact-categories{display:flex;gap:.6rem;flex-wrap:wrap;margin:1.5rem 0 2rem}.contact-categories span{border:1px solid rgba(23,56,75,.25);border-radius:999px;padding:.45rem .75rem;font-size:.8rem}.contact-art{max-height:650px;overflow:hidden;opacity:.87}.contact-art img{width:100%;height:100%;object-fit:cover}.microcopy{font-size:.8rem;opacity:.75}
+.site-footer{padding:3rem clamp(20px,5vw,70px);background:#0d2836;color:white;display:grid;grid-template-columns:1fr auto;gap:1rem}.footer-brand strong,.footer-brand span{display:block}.footer-links{display:flex;gap:1rem;flex-wrap:wrap}.copyright{grid-column:1/-1;font-size:.7rem;color:rgba(255,255,255,.62);margin-top:1.3rem}
+@media(max-width:1050px){.nav{gap:.7rem;font-size:.74rem}}
+@media(max-width:920px){.nav{display:none;position:absolute;top:80px;left:0;right:0;background:rgba(244,234,213,.98);padding:1.2rem 20px;flex-direction:column;align-items:flex-start}.nav.open{display:flex}.menu-toggle{display:block}.service-portals,.collection-grid,.service-list,.frame-grid,.trade-grid{grid-template-columns:1fr 1fr}.split-section,.edition-rule,.trade-visual,.canvas-section,.contact-layout,.faq-layout,.rights-section,.licensing-grid{grid-template-columns:1fr}.text-over-art{grid-template-columns:1fr}.statement-image{min-height:460px}.process-section{grid-template-columns:1fr 1fr}.editorial-strip,.photo-to-art,.download-section{grid-template-columns:1fr}.editorial-photo,.photo-to-art-image,.download-photo{min-height:330px;margin:2rem 20px 0}.difference-grid{grid-template-columns:1fr}}
+@media(max-width:620px){h1{font-size:3.5rem}.brand span{font-size:1rem}.brand img{width:44px;height:44px}.home-hero{min-height:640px}.hero-content,.page-hero-copy{margin-left:20px}.service-portals,.collection-grid,.service-list,.frame-grid,.canvas-options,.trade-grid,.process-section,.rights-grid,.collection-note,.configurator{grid-template-columns:1fr}.configurator .full{grid-column:auto}.art-card,.art-card.wide{min-height:480px}.warm-band{padding:5rem 0}.floating-art{opacity:.09}.home-copy{margin-left:auto}.site-footer{grid-template-columns:1fr}}
+
+
+/* Additions made from the numbered business instructions — baseline design above is unchanged. */
+.story-profile,.next-chapter,.detail-split{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(2rem,6vw,6rem);align-items:center;padding:7rem 0}
+.story-photo{margin:0;max-width:360px}
+.story-photo img{width:100%;max-height:480px;object-fit:cover;box-shadow:0 24px 70px rgba(23,56,75,.14)}
+.story-photo figcaption{font-size:.72rem;margin-top:.55rem;color:#566a74}
+.story-photo-secondary{justify-self:end;max-width:310px}
+.story-signoff{font-family:var(--serif);font-size:1.9rem;color:var(--ink);margin-top:2rem}
+
+.business-hub{padding:6rem 0}
+.business-hub-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin-top:2.5rem}
+.business-hub-grid a{padding:2rem;border:1px solid rgba(23,56,75,.1);background:rgba(255,255,255,.12);min-height:190px;display:flex;flex-direction:column}
+.business-hub-grid strong{font-family:var(--serif);font-size:2rem}
+.business-hub-grid span{font-family:var(--serif);font-size:1.65rem;color:var(--ink);margin:.25rem 0}
+.business-hub-grid small{font-size:.9rem;max-width:460px}
+
+.pricing-table{width:100%;border-collapse:collapse;margin-top:1.5rem}
+.pricing-table th,.pricing-table td{padding:.85rem 0;border-bottom:1px solid rgba(23,56,75,.2);text-align:left}
+.pricing-note{font-size:.82rem;color:#51636d;margin-top:1rem}
+.service-price{font-size:.92rem;margin-top:1.2rem}
+.licence-cards strong{font-family:var(--serif);font-size:1.65rem}
+.internet-panel{min-height:470px;background-size:cover;background-position:center;opacity:.28;box-shadow:0 24px 70px rgba(23,56,75,.11)}
+.panel-paper{background-image:url("https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=1400&auto=format&fit=crop")}
+.panel-frame{background-image:url("https://images.unsplash.com/photo-1561214115-f2f134cc4912?q=80&w=1400&auto=format&fit=crop")}
+.panel-canvas{background-image:url("https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=1400&auto=format&fit=crop")}
+.panel-digital{background-image:url("https://images.unsplash.com/photo-1580136579312-94651dfd596d?q=80&w=1400&auto=format&fit=crop")}
+.panel-stationery{background-image:url("https://images.pexels.com/photos/5040743/pexels-photo-5040743.jpeg?auto=compress&cs=tinysrgb&w=1400")}
+.panel-gift{background-image:url("https://images.unsplash.com/photo-1516383607781-913a19294fd1?q=80&w=1400&auto=format&fit=crop")}
+.panel-certificate{background-image:url("https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1400&auto=format&fit=crop")}
+
+.option-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem;padding:0 0 6rem}
+.option-grid article{border-top:1px solid rgba(23,56,75,.22);padding-top:1.1rem}
+.frame-choice-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.3rem;padding:1rem 0 7rem}
+.mini-frame{height:165px;padding:16px;margin-bottom:1rem;box-shadow:0 12px 30px rgba(0,0,0,.1)}
+.mini-frame:after{content:"";display:block;width:100%;height:100%;background:linear-gradient(135deg,#eee3ce,#f8f1e5);border:12px solid rgba(255,255,255,.85)}
+.canvas-samples{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:1rem 0 5rem}
+.canvas-preview{padding:7px;box-shadow:12px 15px 28px rgba(0,0,0,.17);background:#d8d0c2}
+.canvas-preview.standard{padding:14px}.canvas-preview.deep{padding:22px}
+.canvas-preview img{width:100%;aspect-ratio:4/5;object-fit:cover}
+
+.stationery-examples{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:1rem 0 4rem}
+.internet-example{height:300px;background-size:cover;background-position:center;opacity:.36;margin-bottom:1rem}
+.example-invite{background-image:url("https://images.pexels.com/photos/5040743/pexels-photo-5040743.jpeg?auto=compress&cs=tinysrgb&w=1000")}
+.example-menu{background-image:url("https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=1000&auto=format&fit=crop")}
+.example-cards{background-image:url("https://images.unsplash.com/photo-1516383607781-913a19294fd1?q=80&w=1000&auto=format&fit=crop")}
+.source-note{font-size:.78rem;color:#51636d;padding-bottom:5rem}
+.legal-cta{padding-bottom:5rem}
+
+.studio-pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin:2.5rem 0}
+.studio-pricing article{border-top:2px solid var(--ink);padding-top:1rem}
+.studio-pricing strong{font-family:var(--serif);font-size:2.6rem}
+.order-form textarea{min-height:125px;padding:1rem;border:1px solid rgba(23,56,75,.25);background:rgba(255,255,255,.24);font:inherit;color:var(--ink2)}
+.consent-line{display:grid!important;grid-template-columns:auto 1fr;align-items:center;gap:.7rem!important}
+.consent-line input{width:auto!important}
+.brief-output pre{white-space:pre-wrap;font-family:var(--sans);font-size:.92rem;line-height:1.55}
+
+.legal-page{padding:5rem 0 7rem;max-width:900px}
+.legal-page h2{font-size:2.2rem;margin-top:2.3rem}
+.legal-warning{border-left:3px solid var(--gold);padding-left:1.2rem;margin-bottom:3rem}
+
+@media(max-width:920px){
+.story-profile,.next-chapter,.detail-split{grid-template-columns:1fr}
+.story-photo-secondary{justify-self:start}
+.business-hub-grid,.frame-choice-grid{grid-template-columns:1fr 1fr}
+.studio-pricing{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+.business-hub-grid,.option-grid,.frame-choice-grid,.canvas-samples,.stationery-examples{grid-template-columns:1fr}
+.story-photo,.story-photo-secondary{max-width:300px}
+}
+
+
+/* ============================================================
+   APPROVED V. MURPHY VISUAL TREATMENT
+   ONLY requested changes:
+   - new seal-only header
+   - transparent header/menu
+   - approved homepage
+   - site-wide colour/font principles
+   Existing layouts, sections, content, pricing and page structure
+   remain unchanged above this block.
+   ============================================================ */
+
+:root{
+  --approved-navy:#0b2a3a;
+  --approved-navy-2:#12394c;
+  --approved-navy-3:#173f54;
+  --approved-cream:#e8e3cf;
+  --approved-cream-soft:#d0ccb8;
+  --approved-line:rgba(232,227,207,.22);
+  --serif:"Cormorant Garamond", Georgia, serif;
+  --sans:"Libre Franklin", Arial, sans-serif;
+}
+
+/* Same font principles throughout */
+body{font-family:var(--sans)}
+h1,h2,h3{font-family:var(--serif)}
+.eyebrow{font-family:var(--sans);font-weight:500}
+
+/* Same colour principles throughout, without changing layout */
+body{
+  background:var(--approved-navy);
+  color:var(--approved-cream);
+}
+.internal-page,
+.story-page,
+.collection-page,
+.shop-page,
+.create-page,
+.trade-page,
+.faq-page,
+.contact-page,
+.formats-page{
+  background:var(--approved-navy);
+  color:var(--approved-cream);
+}
+
+/* Requested header treatment: seal only, transparent, no white bar */
+.site-header.seal-header{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  z-index:100;
+  height:78px;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  color:var(--approved-cream);
+}
+
+.seal-brand{
+  display:flex;
+  align-items:center;
+  width:58px;
+  height:58px;
+  padding:0;
+  margin:0;
+}
+
+.seal-brand img{
+  width:58px;
+  height:58px;
+  object-fit:contain;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+}
+
+.site-header.seal-header .nav{
+  color:var(--approved-cream);
+  background:transparent;
+}
+
+.site-header.seal-header .nav a{
+  color:var(--approved-cream);
+}
+
+.site-header.seal-header .nav a:after{
+  background:var(--approved-cream);
+}
+
+.site-header.seal-header .menu-toggle{
+  color:var(--approved-cream);
+  border-color:rgba(232,227,207,.65);
+  background:rgba(11,42,58,.08);
+  backdrop-filter:blur(3px);
+}
+
+/* Approved front page — no V. Murphy wordmark */
+.approved-home-hero{
+  position:relative;
+  min-height:100svh;
+  height:auto;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding-top:72px;
+  color:var(--approved-cream);
+  background:var(--approved-navy);
+}
+
+.approved-hero-background{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:
+    radial-gradient(circle at 35% 26%, rgba(139,153,150,.16), transparent 25%),
+    radial-gradient(circle at 72% 12%, rgba(73,91,103,.18), transparent 26%),
+    linear-gradient(160deg,var(--approved-navy-3) 0%,var(--approved-navy-2) 43%,var(--approved-navy) 100%);
+}
+
+/* PHASE 1: seal starts small + faint, grows + brightens once, then stays */
+.approved-seal-lockup{
+  position:relative;
+  z-index:3;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-height:390px;
+  justify-content:flex-end;
+  padding-bottom:14px;
+}
+
+.hero-seal{
+  width:290px;
+  height:290px;
+  object-fit:contain;
+  opacity:.10;
+  transform:scale(.34);
+  filter:brightness(.65);
+  animation:vmSealReveal 2.8s cubic-bezier(.18,.78,.24,1) forwards;
+  will-change:transform,opacity,filter;
+}
+
+@keyframes vmSealReveal{
+  0%{
+    opacity:.10;
+    transform:scale(.34);
+    filter:brightness(.62);
+  }
+  68%{
+    opacity:.90;
+    transform:scale(1.035);
+    filter:brightness(1.08);
+  }
+  100%{
+    opacity:1;
+    transform:scale(1);
+    filter:brightness(1);
+  }
+}
+
+/* PHASE 2: after seal reaches full size, ART STUDIO fades in once and remains */
+.hero-art-studio{
+  margin-top:-4px;
+  font-family:var(--sans);
+  font-size:1.05rem;
+  font-weight:300;
+  letter-spacing:.50em;
+  color:var(--approved-cream-soft);
+  opacity:0;
+  transform:translateY(7px);
+  animation:artStudioReveal 1.35s ease forwards;
+  animation-delay:2.75s;
+}
+
+.hero-art-studio:before,
+.hero-art-studio:after{
+  content:"";
+  display:inline-block;
+  width:34px;
+  height:1px;
+  margin:0 18px 5px;
+  background:rgba(232,227,207,.42);
+}
+
+@keyframes artStudioReveal{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* ONLY this widened section contains the fading paintings */
+.approved-art-band{
+  position:relative;
+  z-index:2;
+  width:100%;
+  height:330px;
+  margin-top:14px;
+  overflow:hidden;
+  background:var(--approved-navy);
+}
+
+.art-band-slide{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  animation:vmArtworkFade 18s infinite;
+}
+
+.art-band-one{
+  background-image:url("courtyard-cafe.jpeg");
+  animation-delay:0s;
+}
+.art-band-two{
+  background-image:url("blue-awnings.jpeg");
+  animation-delay:6s;
+}
+.art-band-three{
+  background-image:url("village-garden-2013.jpeg");
+  animation-delay:12s;
+}
+
+@keyframes vmArtworkFade{
+  0%{opacity:0;transform:scale(1.01)}
+  8%{opacity:1}
+  28%{opacity:1;transform:scale(1.035)}
+  39%{opacity:0}
+  100%{opacity:0}
+}
+
+.art-band-edge-fade{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,
+      rgba(11,42,58,.64) 0%,
+      rgba(11,42,58,.06) 10%,
+      rgba(11,42,58,.02) 50%,
+      rgba(11,42,58,.06) 90%,
+      rgba(11,42,58,.64) 100%),
+    linear-gradient(180deg,rgba(11,42,58,.14),rgba(11,42,58,.08));
+}
+
+/* Approved message under the art band */
+.approved-message{
+  position:relative;
+  z-index:3;
+  width:min(860px,calc(100% - 40px));
+  text-align:center;
+  padding:28px 0 58px;
+  color:var(--approved-cream);
+}
+
+.approved-message .eyebrow{
+  font-family:var(--serif);
+  font-size:1.35rem;
+  text-transform:none;
+  letter-spacing:0;
+  color:var(--approved-cream);
+  margin-bottom:.25rem;
+}
+
+.approved-message h1{
+  font-size:clamp(2.4rem,4vw,3.25rem);
+  font-weight:500;
+  line-height:1.12;
+  letter-spacing:-.02em;
+  margin-bottom:1rem;
+}
+
+.approved-message .lead{
+  margin-inline:auto;
+  max-width:760px;
+  color:rgba(232,227,207,.90);
+}
+
+.approved-message .actions{
+  justify-content:center;
+}
+
+.approved-message .button.primary{
+  background:#204a63;
+  color:var(--approved-cream);
+  border-color:transparent;
+}
+
+.approved-message .button.ghost{
+  background:transparent;
+  color:var(--approved-cream);
+  border-color:rgba(232,227,207,.74);
+}
+
+/* Apply same palette principles internally without moving/restructuring anything */
+.page-hero-copy,
+.statement-copy,
+.download-copy,
+.photo-to-art-copy,
+.site-footer{
+  color:var(--approved-cream);
+}
+
+.eyebrow,
+.eyebrow.dark,
+.text-link{
+  color:var(--approved-cream-soft);
+}
+
+.warm-band,
+.configurator-section,
+.config-section,
+.editorial-strip{
+  background:linear-gradient(135deg,#173f54,#102f40) !important;
+  color:var(--approved-cream);
+}
+
+.frame-section,
+.licensing-section,
+.difference-band,
+.separation-band,
+.photo-to-art,
+.download-section,
+.text-over-art,
+.small-band{
+  background:var(--approved-navy) !important;
+  color:var(--approved-cream);
+}
+
+.transparent-copy,
+.rule-card,
+.contact-panel,
+.business-hub-grid a,
+.trade-grid article,
+.service-list article,
+.option-grid article,
+.rights-grid article,
+.licence-cards article,
+.studio-pricing article,
+.collection-note>div{
+  color:var(--approved-cream);
+}
+
+.pricing-table th,.pricing-table td,
+.price-table th,.price-table td,
+.faq details,.faq-list details,
+.service-list article,.option-grid article,
+.canvas-options div,.rights-grid article,
+.licence-cards article,.studio-pricing article{
+  border-color:var(--approved-line) !important;
+}
+
+.pricing-note,
+.source-note,
+.microcopy,
+.micro,
+.story-photo figcaption,
+.canvas-options span{
+  color:rgba(232,227,207,.66) !important;
+}
+
+.configurator input,
+.configurator select,
+.configurator textarea,
+.studio-form input,
+.studio-form select,
+.studio-form textarea{
+  color:var(--approved-cream) !important;
+  background:rgba(255,255,255,.05) !important;
+  border-color:rgba(232,227,207,.26) !important;
+}
+
+.configurator option,
+.studio-form option{
+  color:#0b2a3a;
+  background:#e8e3cf;
+}
+
+.site-footer{
+  background:#08222f !important;
+}
+
+@media(max-width:920px){
+  .site-header.seal-header{
+    height:72px;
+  }
+
+  .site-header.seal-header .nav{
+    top:72px;
+    background:rgba(8,34,47,.96) !important;
+    color:var(--approved-cream);
+  }
+
+  .approved-home-hero{
+    padding-top:66px;
+  }
+
+  .approved-seal-lockup{
+    min-height:330px;
+  }
+
+  .hero-seal{
+    width:235px;
+    height:235px;
+  }
+
+  .approved-art-band{
+    height:285px;
+  }
+}
+
+@media(max-width:620px){
+  .seal-brand,
+  .seal-brand img{
+    width:48px;
+    height:48px;
+  }
+
+  .approved-seal-lockup{
+    min-height:285px;
+  }
+
+  .hero-seal{
+    width:205px;
+    height:205px;
+  }
+
+  .hero-art-studio{
+    font-size:.86rem;
+    letter-spacing:.38em;
+  }
+
+  .hero-art-studio:before,
+  .hero-art-studio:after{
+    width:23px;
+    margin-inline:10px;
+  }
+
+  .approved-art-band{
+    height:245px;
+  }
+
+  .approved-message .eyebrow{
+    font-size:1.08rem;
+  }
+
+  .approved-message h1{
+    font-size:2.5rem;
+  }
+}
+
+
+/* ============================================================
+   CORRECTION — exact homepage phasing requested
+   ============================================================ */
+
+/* HOME PAGE: no VM seal in the top-left corner.
+   Internal pages retain the new seal top-left exactly as requested. */
+.homepage-header-no-seal{
+  justify-content:flex-end !important;
+}
+.homepage-header-no-seal .brand,
+.homepage-header-no-seal .seal-brand{
+  display:none !important;
+}
+
+/* Slower single-run seal reveal:
+   small + faint -> full size + brightness -> stays permanently */
+.hero-seal{
+  opacity:.08 !important;
+  transform:scale(.28) !important;
+  filter:brightness(.55) !important;
+  animation:vmSealRevealSlow 5.5s cubic-bezier(.16,.76,.22,1) forwards !important;
+}
+
+/* ART STUDIO remains completely invisible until AFTER seal is finished.
+   Then it fades in slowly and stays permanently. */
+.hero-art-studio{
+  opacity:0 !important;
+  transform:translateY(8px) !important;
+  animation:artStudioRevealSlow 2.6s ease forwards !important;
+  animation-delay:5.65s !important;
+}
+
+@keyframes vmSealRevealSlow{
+  0%{
+    opacity:.08;
+    transform:scale(.28);
+    filter:brightness(.55);
+  }
+  45%{
+    opacity:.34;
+    transform:scale(.58);
+    filter:brightness(.72);
+  }
+  78%{
+    opacity:.76;
+    transform:scale(.88);
+    filter:brightness(.92);
+  }
+  100%{
+    opacity:1;
+    transform:scale(1);
+    filter:brightness(1);
+  }
+}
+
+@keyframes artStudioRevealSlow{
+  0%{
+    opacity:0;
+    transform:translateY(8px);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+
+/* ============================================================
+   USER-SUPPLIED SEAL / COLOUR MATCH
+   Only the requested visual changes are applied here.
+   ============================================================ */
+
+:root {
+  --approved-navy:#233242;
+  --approved-navy-2:#233242;
+  --approved-navy-3:#233242;
+  --approved-cream:#e4dfc9;
+  --approved-cream-soft:#cfcab7;
+}
+
+/* Use the supplied image's background colour as the principal site colour. */
+html, body,
+.internal-page,
+.story-page,
+.collection-page,
+.shop-page,
+.create-page,
+.trade-page,
+.faq-page,
+.contact-page,
+.formats-page {
+  background:#233242 !important;
+}
+
+/* Keep all existing layouts. Replace gradients with the exact supplied main background colour. */
+.approved-hero-background,
+.warm-band,
+.configurator-section,
+.config-section,
+.editorial-strip,
+.frame-section,
+.licensing-section,
+.difference-band,
+.separation-band,
+.photo-to-art,
+.download-section,
+.text-over-art,
+.small-band,
+.site-footer {
+  background:#233242 !important;
+}
+
+/* Seal image now comes directly from the supplied reference,
+   preserving its exact VM typeform and interlocking letter arrangement. */
+.hero-seal,
+.seal-brand img {
+  object-fit:contain !important;
+  background:transparent !important;
+}
+
+/* Homepage must have NO top-left VM seal. */
+.homepage-header-no-seal .brand,
+.homepage-header-no-seal .seal-brand {
+  display:none !important;
+}
+
+
+/* ============================================================
+   CORRECTIONS — requested only
+   ============================================================ */
+
+/* HOME PAGE:
+   large centre seal visible; no top-left homepage seal. */
+.homepage-header-no-seal .brand,
+.homepage-header-no-seal .seal-brand{
+  display:none !important;
+}
+
+.hero-seal{
+  display:block !important;
+  visibility:visible !important;
+  width:290px !important;
+  height:290px !important;
+  object-fit:contain !important;
+
+  opacity:.08 !important;
+  transform:scale(.28) !important;
+  filter:brightness(.55) !important;
+
+  animation:vmSealRevealCorrected 6.5s cubic-bezier(.16,.76,.22,1) forwards !important;
+}
+
+@keyframes vmSealRevealCorrected{
+  0%{
+    opacity:.08;
+    transform:scale(.28);
+    filter:brightness(.55);
+  }
+  45%{
+    opacity:.30;
+    transform:scale(.56);
+    filter:brightness(.70);
+  }
+  78%{
+    opacity:.74;
+    transform:scale(.88);
+    filter:brightness(.90);
+  }
+  100%{
+    opacity:1;
+    transform:scale(1);
+    filter:brightness(1);
+  }
+}
+
+/* ART STUDIO begins only after the seal is fully in place. */
+.hero-art-studio{
+  opacity:0 !important;
+  transform:translateY(8px) !important;
+  animation:artStudioRevealCorrected 2.8s ease forwards !important;
+  animation-delay:6.65s !important;
+}
+
+@keyframes artStudioRevealCorrected{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Make the fading painting strip thinner. */
+.approved-art-band{
+  height:175px !important;
+  margin-top:10px !important;
+}
+
+/* Slow the three fading paintings substantially. */
+.art-band-slide{
+  animation-duration:42s !important;
+  background-size:cover !important;
+  background-position:center !important;
+}
+
+.art-band-one{animation-delay:0s !important}
+.art-band-two{animation-delay:14s !important}
+.art-band-three{animation-delay:28s !important}
+
+@keyframes vmArtworkFade{
+  0%{opacity:0;transform:scale(1.002)}
+  10%{opacity:1}
+  27%{opacity:1;transform:scale(1.015)}
+  37%{opacity:0}
+  100%{opacity:0}
+}
+
+/* INTERNAL PAGES:
+   reserve clear vertical space beneath the seal/menu so hero
+   heading, eyebrow and seal never overlap. */
+body:not(.home-page) .site-header.seal-header{
+  height:82px !important;
+}
+
+body:not(.home-page) .seal-brand,
+body:not(.home-page) .seal-brand img{
+  width:54px !important;
+  height:54px !important;
+  flex:0 0 54px !important;
+}
+
+body:not(.home-page) .page-hero,
+body:not(.home-page) .internal-hero{
+  padding-top:132px !important;
+}
+
+body:not(.home-page) .page-hero-copy,
+body:not(.home-page) .internal-hero-copy{
+  margin-top:58px !important;
+  margin-left:max(24px,7vw) !important;
+  max-width:min(860px,calc(100% - 48px)) !important;
+}
+
+body:not(.home-page) .page-hero-copy .eyebrow,
+body:not(.home-page) .internal-hero-copy .eyebrow{
+  margin-bottom:1.15rem !important;
+}
+
+body:not(.home-page) .page-hero-copy h1,
+body:not(.home-page) .internal-hero-copy h1{
+  margin-top:0 !important;
+  line-height:1.02 !important;
+}
+
+/* Mobile: additional collision protection. */
+@media(max-width:920px){
+  .approved-art-band{
+    height:160px !important;
+  }
+
+  body:not(.home-page) .page-hero,
+  body:not(.home-page) .internal-hero{
+    padding-top:120px !important;
+  }
+
+  body:not(.home-page) .page-hero-copy,
+  body:not(.home-page) .internal-hero-copy{
+    margin-top:46px !important;
+    margin-left:20px !important;
+    max-width:calc(100% - 40px) !important;
+  }
+}
+
+@media(max-width:620px){
+  .hero-seal{
+    width:205px !important;
+    height:205px !important;
+  }
+
+  .approved-art-band{
+    height:145px !important;
+  }
+
+  body:not(.home-page) .site-header.seal-header{
+    height:72px !important;
+  }
+
+  body:not(.home-page) .page-hero,
+  body:not(.home-page) .internal-hero{
+    padding-top:112px !important;
+  }
+
+  body:not(.home-page) .page-hero-copy,
+  body:not(.home-page) .internal-hero-copy{
+    margin-top:42px !important;
+    margin-left:20px !important;
+    max-width:calc(100% - 40px) !important;
+  }
+}
+
+
+/* ============================================================
+   HOMEPAGE LOGO VISIBILITY FIX ONLY
+   Previous !important declarations prevented the image itself
+   from completing its animation. The existing seal is unchanged;
+   only the animation is moved to wrapper elements.
+   ============================================================ */
+
+/* Keep the exact seal artwork itself fully rendered. */
+.hero-seal{
+  display:block !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  transform:none !important;
+  filter:none !important;
+  animation:none !important;
+}
+
+/* Seal wrapper: starts small/faint, slowly reaches full size,
+   then remains permanently. */
+.hero-seal-stage{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:290px;
+  height:290px;
+  opacity:.08;
+  transform:scale(.28);
+  filter:brightness(.55);
+  animation:vmSealStageReveal 6.5s cubic-bezier(.16,.76,.22,1) forwards;
+}
+
+@keyframes vmSealStageReveal{
+  0%{
+    opacity:.08;
+    transform:scale(.28);
+    filter:brightness(.55);
+  }
+  45%{
+    opacity:.30;
+    transform:scale(.56);
+    filter:brightness(.70);
+  }
+  78%{
+    opacity:.74;
+    transform:scale(.88);
+    filter:brightness(.90);
+  }
+  100%{
+    opacity:1;
+    transform:scale(1);
+    filter:brightness(1);
+  }
+}
+
+/* Existing ART STUDIO element is forced to its normal visual state.
+   Its wrapper remains invisible until AFTER the seal is fully complete. */
+.hero-art-studio{
+  opacity:1 !important;
+  transform:none !important;
+  animation:none !important;
+}
+
+.hero-art-studio-stage{
+  opacity:0;
+  transform:translateY(8px);
+  animation:vmArtStudioStageReveal 2.8s ease forwards;
+  animation-delay:6.65s;
+}
+
+@keyframes vmArtStudioStageReveal{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media(max-width:920px){
+  .hero-seal-stage{
+    width:235px;
+    height:235px;
+  }
+}
+
+@media(max-width:620px){
+  .hero-seal-stage{
+    width:205px;
+    height:205px;
+  }
+}

@@ -1,0 +1,212 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Build a customer-directed Studio Edition from guided choices."><title>Create Your Own | V. Murphy Studio Editions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Libre+Franklin:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"></head><body>
+<header class="site-header seal-header">
+  <a class="brand seal-brand" href="index.html" aria-label="V. Murphy Art Studio home">
+    <img src="vm-seal.png" alt="VM seal">
+  </a>
+  <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">Menu</button>
+  <nav class="nav">
+    <a href="story.html">Story</a><a href="collection.html">Collection</a><a href="shop.html">Shop</a>
+    <a href="create.html">Create Your Own</a><a href="trade.html">Trade &amp; Licensing</a>
+    <a href="faq.html">FAQ</a><a href="contact.html">Contact</a>
+  </nav>
+</header><main><section class="page-hero compact"><div class="page-image bg-create"></div><div class="page-hero-copy"><p class="eyebrow">V. Murphy Studio Editions</p><h1>Create something new, without rewriting the past.</h1><p class="lead">Choose the ingredients of a new composition through a guided process. New pieces are Studio Editions — never presented as paintings by V. Murphy.</p></div></section>
+<section class="edition-rule content-width"><div class="rule-card"><p class="eyebrow dark">Important distinction</p><h2>Original Collection ≠ Studio Editions</h2><p>The original V. Murphy collection remains historically fixed. Customer-directed digital compositions belong to a separate studio collection so the provenance of the originals remains clear.</p></div><div class="side-visual bg-digital"></div></section>
+
+
+<section class="configurator-section">
+  <div class="content-width">
+    <p class="eyebrow dark">Configure an order</p>
+    <h2>Build a detailed Studio Edition enquiry.</h2>
+    <p class="section-lead">The first orders are processed manually. You submit the brief; the studio reviews it, confirms feasibility and price, then sends the payment route before any creative work starts.</p>
+
+    <div class="studio-pricing">
+      <article><h3>Essential Studio Edition</h3><strong>£69</strong><p>One concept direction, one revision and a high-resolution personal-use digital file.</p></article>
+      <article><h3>Bespoke Studio Edition</h3><strong>£119</strong><p>Up to three concept directions, two revision rounds and more detailed architecture or personal elements.</p></article>
+      <article><h3>Signature Studio Edition</h3><strong>£189</strong><p>Three concept directions, three revisions, priority review and one A4 fine-art print.</p></article>
+    </div>
+    <p class="pricing-note"><strong>Private Edition:</strong> add £75. The final approved composition is not intentionally released into the standard Studio Editions catalogue. See the legal terms for the limits of digital exclusivity.</p>
+
+    <style>
+      /* Create Your Own page only — no other site/page styles are changed */
+      #studio-order-form{--vm-ink:#173b3c;--vm-navy:#1c3142;--vm-cream:#f4edda;--vm-paper:#f8f4ea;--vm-gold:#b69b65}
+      #studio-order-form .choice-section{
+        --accent:#8ca6a6;
+        grid-column:1/-1;
+        border:1px solid color-mix(in srgb,var(--accent) 34%,rgba(18,50,55,.16));
+        border-radius:18px;
+        padding:0;
+        margin:10px 0;
+        background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 14%,#f7f3e9),rgba(255,255,255,.76));
+        box-shadow:0 8px 24px rgba(8,31,42,.07);
+        overflow:hidden;
+        position:relative;
+      }
+      #studio-order-form .choice-section::before{
+        content:"";position:absolute;inset:0 auto 0 0;width:5px;background:var(--accent);opacity:.9
+      }
+      #studio-order-form .choice-section:nth-of-type(1){--accent:#a47772}
+      #studio-order-form .choice-section:nth-of-type(2){--accent:#728f82}
+      #studio-order-form .choice-section:nth-of-type(3){--accent:#b48b58}
+      #studio-order-form .choice-section:nth-of-type(4){--accent:#6b879d}
+      #studio-order-form .choice-section:nth-of-type(5){--accent:#9a718c}
+      #studio-order-form .choice-section:nth-of-type(6){--accent:#7e8062}
+      #studio-order-form .choice-section:nth-of-type(7){--accent:#8c6676}
+      #studio-order-form .choice-section:nth-of-type(8){--accent:#a47b54}
+      #studio-order-form .choice-section:nth-of-type(9){--accent:#6d8a88}
+      #studio-order-form .choice-section:nth-of-type(10){--accent:#7a7695}
+      #studio-order-form .choice-section:nth-of-type(11){--accent:#9a8864}
+      #studio-order-form .choice-section:nth-of-type(12){--accent:#6e8790}
+      #studio-order-form .choice-section:nth-of-type(13){--accent:#8a7565}
+      #studio-order-form .choice-section:nth-of-type(14){--accent:#6f8c78}
+      #studio-order-form .choice-section>summary{
+        cursor:pointer;list-style:none;padding:19px 22px 19px 25px;
+        font-family:"Cormorant Garamond",serif;font-size:1.35rem;font-weight:600;color:var(--vm-ink);
+        display:flex;align-items:center;justify-content:space-between;gap:16px;letter-spacing:.01em
+      }
+      #studio-order-form .choice-section>summary::-webkit-details-marker{display:none}
+      #studio-order-form .choice-section>summary::after{
+        content:"+";font-family:"Libre Franklin",sans-serif;font-size:1.05rem;font-weight:500;
+        width:30px;height:30px;display:grid;place-items:center;border-radius:50%;
+        color:var(--vm-ink);background:color-mix(in srgb,var(--accent) 22%,#fff);border:1px solid color-mix(in srgb,var(--accent) 45%,#fff);
+        flex:0 0 30px
+      }
+      #studio-order-form .choice-section[open]>summary{border-bottom:1px solid color-mix(in srgb,var(--accent) 28%,rgba(18,50,55,.12));background:rgba(255,255,255,.26)}
+      #studio-order-form .choice-section[open]>summary::after{content:"−"}
+      #studio-order-form .choice-section-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:22px 22px 24px 25px}
+      #studio-order-form .choice-section-grid .full{grid-column:1/-1}
+      #studio-order-form .choice-subhead{grid-column:1/-1;margin:4px 0 -3px;font-family:"Libre Franklin",sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:#55706e}
+      #studio-order-form .choice-section label{display:grid;gap:8px}
+      #studio-order-form .choice-section label>span{font-family:"Libre Franklin",sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:#4c6564}
+      #studio-order-form .choice-section select,
+      #studio-order-form .choice-section input[type="url"],
+      #studio-order-form .choice-section textarea{
+        width:100%;box-sizing:border-box;border:1px solid rgba(23,59,60,.22);border-radius:12px;
+        background:rgba(255,255,255,.82);color:#203d3d;padding:13px 14px;
+        font:400 .96rem/1.35 "Libre Franklin",sans-serif;
+        box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 3px 10px rgba(13,42,50,.04)
+      }
+      #studio-order-form .choice-section select{min-height:48px;padding-right:40px}
+      #studio-order-form .choice-section textarea{min-height:132px;resize:vertical}
+      #studio-order-form .choice-section select:focus,
+      #studio-order-form .choice-section input:focus,
+      #studio-order-form .choice-section textarea:focus{outline:2px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:2px;border-color:var(--accent)}
+      #studio-order-form .customer-details{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:16px;padding:22px;border:1px solid rgba(244,237,218,.18);border-radius:18px;background:rgba(255,255,255,.055)}
+      #studio-order-form .customer-details h3{grid-column:1/-1;margin:0 0 4px;color:var(--vm-cream)}
+      #studio-order-form .customer-details .full{grid-column:1/-1}
+      @media(max-width:720px){
+        #studio-order-form .choice-section-grid,#studio-order-form .customer-details{grid-template-columns:1fr}
+        #studio-order-form .choice-section-grid .full,#studio-order-form .customer-details .full{grid-column:1}
+        #studio-order-form .choice-section>summary{font-size:1.28rem;padding:18px 18px 18px 22px}
+        #studio-order-form .choice-section-grid{padding:20px 18px 22px 22px}
+      }
+    </style>
+
+    <form id="studio-order-form" class="configurator order-form">
+      <label><span>Service level</span><select name="service"><option>Essential Studio Edition — £69</option><option>Bespoke Studio Edition — £119</option><option>Signature Studio Edition — £189</option></select></label>
+      <label><span>Edition type</span><select name="edition"><option>Studio Edition — may later join the Studio Editions catalogue</option><option>Private Edition — add £75</option></select></label>
+
+      <details class="choice-section" open><summary>1. Occasion / Purpose</summary><div class="choice-section-grid">
+        <label><span>Theme / event</span><select name="occasion"><option>No specific event</option><option>Wedding</option><option>Anniversary</option><option>Engagement</option><option>Birthday</option><option>New home</option><option>Retirement</option><option>Christmas</option><option>Memorial / remembrance</option><option>Travel memory</option><option>Family</option><option>Romance</option><option>Celebration</option><option>Gift</option></select></label>
+        <label><span>Celebration / activity</span><select name="celebration"><option>No specific activity</option><option>Wedding ceremony</option><option>Drinks reception</option><option>Dinner</option><option>Dancing</option><option>Proposal</option><option>Toast / champagne</option><option>Garden party</option><option>Picnic</option><option>Family gathering</option><option>Festival</option><option>Travelling</option><option>Relaxing</option></select></label>
+      </div></details>
+
+      <details class="choice-section"><summary>2. Location / Setting</summary><div class="choice-section-grid">
+        <label><span>Setting</span><select name="setting"><option>Countryside</option><option>Seaside</option><option>Village</option><option>City</option><option>Town square</option><option>Café</option><option>Courtyard</option><option>Mountains</option><option>Woodland</option><option>Garden</option><option>Lake / river</option><option>Island</option><option>Country house</option><option>Indoor scene</option><option>Estate grounds</option><option>Street scene</option><option>Desert</option><option>Abstract / imagined setting</option><option>Use my own reference photograph</option></select></label>
+        <label><span>Location / world style</span><select name="environment"><option>No specific location</option><option>British</option><option>Mediterranean</option><option>Italian</option><option>French</option><option>Greek</option><option>Scandinavian</option><option>Alpine</option><option>American</option><option>Tropical</option><option>Middle Eastern</option><option>Asian-inspired</option><option>Urban</option><option>Rural</option><option>Fantasy / imagined</option></select></label>
+        <p class="choice-subhead">Architecture / environment</p>
+        <label class="full"><span>Architecture</span><select name="architecture"><option>No architecture / landscape only</option><option>Georgian</option><option>Victorian</option><option>Edwardian</option><option>Cottage</option><option>Country house</option><option>Castle</option><option>Mediterranean villa</option><option>Italian</option><option>French</option><option>Farmhouse</option><option>Contemporary</option><option>Rustic</option><option>Industrial</option><option>Historic town</option><option>Art Deco</option><option>Modernist</option><option>Follow reference photograph</option></select></label>
+      </div></details>
+
+      <details class="choice-section"><summary>3. Time of Year / Weather</summary><div class="choice-section-grid">
+        <label><span>Time of year</span><select name="season"><option>Spring</option><option>Early summer</option><option>High summer</option><option>Autumn</option><option>Late autumn</option><option>Winter</option><option>Christmas / festive winter</option><option>No preference</option></select></label>
+        <label><span>Weather conditions</span><select name="weather"><option>Clear</option><option>Bright sunshine</option><option>Soft cloud</option><option>Dramatic clouds</option><option>Mist / fog</option><option>Light rain</option><option>Heavy rain</option><option>After rain / wet reflections</option><option>Stormy</option><option>Light snowfall</option><option>Fresh snow</option><option>Windy</option><option>Heat / haze</option><option>No preference</option></select></label>
+      </div></details>
+
+      <details class="choice-section"><summary>4. Time of Day / Lighting</summary><div class="choice-section-grid">
+        <label><span>Time of day</span><select name="time"><option>Dawn</option><option>Morning</option><option>Midday</option><option>Afternoon</option><option>Golden hour</option><option>Sunset</option><option>Twilight</option><option>Evening</option><option>Night</option><option>No preference</option></select></label>
+        <label><span>Lighting</span><select name="lighting"><option>Soft diffused light</option><option>Bright natural light</option><option>Warm sunlight</option><option>Backlit</option><option>Dappled light</option><option>Window light</option><option>Candlelight</option><option>Festoon / fairy lights</option><option>Moonlight</option><option>Dramatic lighting</option><option>Cinematic lighting</option><option>No preference</option></select></label>
+      </div></details>
+
+      <details class="choice-section"><summary>5. People / Characters</summary><div class="choice-section-grid">
+        <label><span>People</span><select name="people"><option>None</option><option>One figure</option><option>Couple</option><option>Family</option><option>Children</option><option>Small gathering</option><option>Large gathering</option><option>Crowd</option><option>Distant figures / silhouettes</option></select></label>
+        <label><span>What are they doing?</span><select name="activity"><option>No specific activity</option><option>Walking</option><option>Dining</option><option>Dancing</option><option>Celebrating</option><option>Relaxing</option><option>Embracing</option><option>Toasting</option><option>Talking</option><option>Looking at the view</option><option>Arriving / departing</option></select></label>
+      </div></details>
+
+      <details class="choice-section"><summary>6. Main Subject</summary><div class="choice-section-grid">
+        <label><span>Main subject</span><select name="subject"><option>Building / venue</option><option>People</option><option>Landscape</option><option>Coastline</option><option>Garden</option><option>Street</option><option>Vehicle</option><option>Boat</option><option>Animals</option><option>Flowers</option><option>Food / drink</option><option>Object / still life</option><option>Abstract scene</option></select></label>
+        <label><span>Supporting elements</span><select name="elements"><option>None</option><option>Flowers</option><option>Foliage</option><option>Trees</option><option>Water</option><option>Beach</option><option>Snow</option><option>Table setting</option><option>Champagne / glasses</option><option>Candles</option><option>Lanterns</option><option>Boats</option><option>Cars</option><option>Seasonal decorations</option><option>Architectural detail</option></select></label>
+      </div></details>
+
+      <details class="choice-section"><summary>7. Art Style</summary><div class="choice-section-grid">
+        <label><span>Art style / medium</span><select name="finish"><option>Watercolour</option><option>Oil painting</option><option>Acrylic painting</option><option>Gouache</option><option>Pastel</option><option>Charcoal</option><option>Pencil drawing</option><option>Pen &amp; ink</option><option>Pen &amp; watercolour</option><option>Linocut / woodcut</option><option>Impressionism</option><option>Post-Impressionism</option><option>Expressionism</option><option>Art Nouveau</option><option>Art Deco</option><option>Surrealism</option><option>Cubism</option><option>Fauvism</option><option>Romanticism</option><option>Renaissance-inspired</option><option>Pop Art</option><option>Street Art</option><option>Stencil Street Art</option><option>Graffiti Art</option><option>Screen Print</option><option>Retro Travel Poster</option><option>Vintage Advertising Poster</option><option>Comic-Book Art</option><option>Graphic Novel</option><option>Collage / Mixed Media</option><option>Minimalist Illustration</option><option>Contemporary Editorial Illustration</option><option>Abstract</option><option>Geometric Abstract</option><option>Botanical Illustration</option><option>Fashion Illustration</option><option>Digital Painting</option><option>Cinematic Illustration</option><option>Colourised Vintage Photograph</option><option>High-Contrast Monochrome</option></select></label>
+        <label><span>Artistic treatment</span><select name="treatment"><option>Realistic</option><option>Loose / painterly</option><option>Highly detailed</option><option>Expressive</option><option>Romantic</option><option>Whimsical</option><option>Graphic</option><option>Vintage</option><option>Elegant</option><option>Rustic</option><option>Dreamlike</option><option>Bold</option><option>Distressed</option><option>Minimalist</option></select></label>
+      </div></details>
+
+      <details class="choice-section"><summary>8. Colour / Tone</summary><div class="choice-section-grid">
+        <label><span>Colour palette</span><select name="palette"><option>Natural</option><option>Warm neutral</option><option>Cool neutral</option><option>Pastel</option><option>Vibrant</option><option>Bold colour</option><option>Muted / vintage</option><option>Mediterranean colour</option><option>Earthy</option><option>Autumnal</option><option>Coastal blue</option><option>Botanical green</option><option>Monochrome</option><option>Black &amp; gold</option><option>Jewel tones</option><option>Soft blue</option><option>Warm ochre</option><option>Customer colours — describe below</option></select></label>
+        <label><span>Colour temperature</span><select name="temperature"><option>Warm</option><option>Cool</option><option>Neutral</option><option>Mixed</option><option>No preference</option></select></label>
+      </div></details>
+
+      <details class="choice-section"><summary>9. Mood / Atmosphere</summary><div class="choice-section-grid">
+        <label class="full"><span>Mood</span><select name="mood"><option>Peaceful</option><option>Romantic</option><option>Joyful</option><option>Nostalgic</option><option>Intimate</option><option>Celebratory</option><option>Dramatic</option><option>Cosy</option><option>Magical</option><option>Sophisticated</option><option>Playful</option><option>Moody</option><option>Adventurous</option><option>Dreamlike</option><option>Lively</option></select></label>
+      </div></details>
+
+      <details class="choice-section"><summary>10. Composition / Viewpoint</summary><div class="choice-section-grid">
+        <label><span>Composition</span><select name="composition"><option>Wide establishing scene</option><option>Medium scene</option><option>Close-up</option><option>Panoramic scene</option><option>Symmetrical</option><option>Asymmetrical</option><option>Minimal / uncluttered</option></select></label>
+        <label><span>Viewpoint</span><select name="viewpoint"><option>Eye level</option><option>Elevated view</option><option>Low viewpoint</option><option>Looking through a doorway</option><option>Looking through a window</option><option>Path leading into scene</option><option>Across water</option><option>Bird's-eye view</option><option>No preference</option></select></label>
+      </div></details>
+
+      <details class="choice-section"><summary>11. Detail / Finish</summary><div class="choice-section-grid">
+        <label><span>Level of detail</span><select name="detaillevel"><option>Minimal</option><option>Simple</option><option>Moderate</option><option>Detailed</option><option>Highly detailed</option></select></label>
+        <label><span>Surface / texture</span><select name="texture"><option>Clean</option><option>Visible brushwork</option><option>Watercolour paper texture</option><option>Canvas texture</option><option>Rough / expressive</option><option>Vintage / distressed</option><option>Smooth graphic finish</option></select></label>
+      </div></details>
+
+      <details class="choice-section"><summary>12. Format / Intended Use</summary><div class="choice-section-grid">
+        <label><span>Format / orientation</span><select name="format"><option>Portrait</option><option>Landscape</option><option>Square</option><option>Panoramic</option><option>Invitation portrait</option><option>Invitation landscape</option></select></label>
+        <label><span>Final product</span><select name="product"><option>Digital only</option><option>Fine-art print</option><option>Framed print</option><option>Canvas</option><option>Artwork print</option><option>Invitation</option><option>Save the Date</option><option>Menu</option><option>Signage</option><option>Stationery suite</option><option>Not decided yet</option></select></label>
+      </div></details>
+
+      <details class="choice-section"><summary>13. Personalisation / Reference</summary><div class="choice-section-grid">
+        <label><span>Personalisation</span><select name="personalisation"><option>No personalisation</option><option>Use my photograph</option><option>Use my venue</option><option>Include a specific object</option><option>Include a pet</option><option>Specific real location</option><option>Specific colours / details</option></select></label>
+        <label><span>Reference image link (optional)</span><input name="reference" type="url" placeholder="iCloud, Google Drive, Dropbox or another share link"></label>
+      </div></details>
+
+      <details class="choice-section" open><summary>14. Your Own Instructions</summary><div class="choice-section-grid">
+        <label class="full"><span>Anything else you'd like us to include?</span><textarea name="details" placeholder="Examples: exact location, specific flowers, blue front door, no cars, clothing details, meaningful objects, colours to match, elements to add or remove."></textarea></label>
+      </div></details>
+
+      <div class="customer-details">
+        <h3>Your details</h3>
+        <label><span>Your name</span><input name="customer" required></label>
+        <label><span>Your email</span><input name="email" type="email" required></label>
+        <label><span>Preferred completion date</span><input name="deadline" type="date"></label>
+        <label><span>Approximate total budget</span><select name="budget"><option>Under £100</option><option>£100–£175</option><option>£175–£300</option><option>£300+</option><option>Not sure yet</option></select></label>
+        <label class="full consent-line"><input name="rights" type="checkbox" required><span>I confirm I have permission to supply any reference photographs used in this enquiry.</span></label>
+      </div>
+
+      <button class="button primary" type="submit">Build my order enquiry</button>
+    </form>
+
+    <div id="order-output" class="brief-output" hidden>
+      <p class="eyebrow dark">Your order enquiry</p>
+      <h3 id="order-title">Studio Edition enquiry</h3>
+      <pre id="order-text"></pre>
+      <div class="actions"><button id="copy-order" class="button outline" type="button">Copy enquiry</button><a id="email-order" class="button primary" href="#">Email the studio</a></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="process-section content-width"><div class="process-step"><span>1</span><h3>Choose</h3><p>Select setting, palette, mood, people, features and format.</p></div><div class="process-step"><span>2</span><h3>Concepts</h3><p>The studio prepares a small set of candidate compositions from the brief.</p></div><div class="process-step"><span>3</span><h3>Refine</h3><p>Choose a favourite and request controlled changes.</p></div><div class="process-step"><span>4</span><h3>Finish</h3><p>Select digital, fine-art paper, canvas or a framed presentation.</p></div></section>
+
+<section class="photo-to-art"><div class="photo-to-art-image bg-personal"></div><div class="photo-to-art-copy"><p class="eyebrow">From your photograph</p><h2>Turn a meaningful place into a studio piece.</h2><p>A future option can allow customers to submit a photograph of a home, wedding venue, favourite café, family cottage or meaningful street. The studio then interprets the scene using selected style choices.</p><p>Any resulting work would be clearly labelled as a contemporary Studio Edition, not an original painting by V. Murphy.</p></div></section>
+
+<section class="rights-section content-width"><div><p class="eyebrow dark">Edition choice</p><h2>Private or shared?</h2></div><div class="rights-grid"><article><h3>Studio Edition</h3><p>You receive the finished piece and the studio may later offer that composition as part of the Studio Editions collection.</p></article><article><h3>Private Edition</h3><p>The finished composition is not intentionally added to the standard Studio Editions catalogue. Final terms should explain the practical limits of exclusivity for digitally generated imagery.</p></article></div></section>
+</main>
+<footer class="site-footer"><div class="footer-brand"><strong>V. Murphy Art Studio</strong><span>Original family collection • Studio Editions • Prints • Licensing</span></div>
+<div class="footer-links"><a href="collection.html">Collection</a><a href="shop.html">Shop</a><a href="create.html">Create Your Own</a><a href="trade.html">Trade</a><a href="legal.html">Terms &amp; Licensing</a></div>
+<p class="copyright">© <span id="year"></span> V. Murphy Art Studio. Artwork © V. Murphy. Studio Editions are identified separately from the original V. Murphy collection.</p></footer><script src="script.js"></script></body></html>
