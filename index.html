@@ -3,402 +3,201 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>V. Murphy Art Studio — Gallery Entrance</title>
+<title>V. Murphy Art Studio — Gallery</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Libre+Franklin:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--cream:#f2ead8;--ink:#17313b;--gold:#b8935f;--wine:#6a303c}
+:root{
+  --navy:#213545;
+  --cream:#efe7d3;
+  --stone:#ece9e2;
+  --stone2:#d8d4cc;
+  --charcoal:#25282a;
+  --oak:#8e6f52;
+}
 *{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#213545;color:var(--cream)}
-body{font-family:"Libre Franklin",sans-serif}
-#stage{position:fixed;inset:0;background:#213545}
-canvas{display:block;width:100%;height:100%}
-#fade{position:absolute;inset:0;z-index:30;background:#213545;pointer-events:none;opacity:1;transition:opacity 3s ease}
-#sealIntro{position:absolute;inset:0;z-index:35;display:grid;place-items:center;pointer-events:none}
-#sealIntro .mark{width:min(82vw,460px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;opacity:0;transform:scale(.86);animation:sealLife 6s ease forwards;text-align:center;margin:0 auto}
-#sealIntro img{display:block;width:min(66vw,330px);height:auto;object-fit:contain;margin:0 auto;box-shadow:none;filter:none;background:transparent}
-#sealIntro span{display:block;width:100%;margin:0 auto;text-align:center;font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;color:#efe7d3;padding-left:.38em}
-@keyframes sealLife{0%{opacity:0;transform:scale(.86)}18%{opacity:1;transform:scale(1)}64%{opacity:1}100%{opacity:0;transform:scale(.96)}}
-#curtain{position:absolute;inset:0;z-index:20;pointer-events:none;background:
-radial-gradient(circle at 50% 46%,transparent 0 34%,rgba(8,10,11,.12) 62%,rgba(2,3,4,.55) 100%)}
-#ui{position:absolute;inset:0;z-index:40;pointer-events:none;padding:max(20px,env(safe-area-inset-top)) 24px max(22px,env(safe-area-inset-bottom));
-display:flex;flex-direction:column;justify-content:space-between}
-.top{display:flex;justify-content:space-between;align-items:center;opacity:0;transition:opacity 1.4s ease}
-.top.visible{opacity:1}
-.logo{width:78px;height:78px;border-radius:50%;overflow:hidden;pointer-events:auto}
-.logo img{width:100%;height:100%;object-fit:cover}
-.menu{pointer-events:auto;color:var(--cream);text-decoration:none;border:1px solid rgba(242,234,216,.76);border-radius:999px;
-padding:12px 22px;background:rgba(19,35,40,.24);backdrop-filter:blur(6px);font-size:.92rem}
-.bottom{max-width:790px;opacity:0;transform:translateY(12px);transition:opacity 1.5s ease,transform 1.5s ease}
-.bottom.visible{opacity:1;transform:none}
-.kicker{letter-spacing:.24em;text-transform:uppercase;font-size:.69rem;color:#d9c6a2;margin-bottom:10px}
-h1{font:600 clamp(2.7rem,8vw,6rem)/.94 "Cormorant Garamond",serif;margin:0 0 10px;text-wrap:balance}
-.lead{font:300 clamp(.95rem,2vw,1.15rem)/1.55 "Libre Franklin",sans-serif;max-width:650px;color:#eee6d5;margin:0 0 16px}
-.actions{display:flex;flex-wrap:wrap;gap:9px;pointer-events:auto}
-.actions a{color:#f6eddb;text-decoration:none;border:1px solid rgba(242,234,216,.48);border-radius:999px;padding:11px 16px;
-background:rgba(12,25,30,.27);backdrop-filter:blur(5px);font-size:.82rem}
-.actions a.primary{background:#efe5d0;color:#17313b;border-color:#efe5d0}
-#hint{position:absolute;left:50%;bottom:15px;transform:translateX(-50%);z-index:41;opacity:0;transition:opacity 1s ease;
-color:rgba(242,234,216,.62);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--navy);font-family:"Libre Franklin",sans-serif}
+#stage{position:fixed;inset:0;background:#ece9e2}
+canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#intro{
+  position:absolute;inset:0;z-index:20;display:grid;place-items:center;
+  background:var(--navy);transition:opacity 2.4s ease;pointer-events:none
+}
+#intro.hide{opacity:0}
+#intro .mark{width:min(66vw,360px);display:flex;flex-direction:column;align-items:center;gap:12px}
+#intro img{display:block;width:100%;height:auto}
+#intro span{color:var(--cream);font-size:.7rem;letter-spacing:.38em;text-transform:uppercase;padding-left:.38em}
+#ui{
+  position:absolute;inset:0;z-index:10;pointer-events:none;
+  padding:max(18px,env(safe-area-inset-top)) 22px max(18px,env(safe-area-inset-bottom));
+  display:flex;flex-direction:column;justify-content:space-between
+}
+#topbar{display:flex;justify-content:space-between;align-items:center;opacity:0;transition:opacity 1.2s ease}
+#topbar.visible{opacity:1}
+#topbar img{width:68px;height:68px;object-fit:contain}
+#topbar a{
+  pointer-events:auto;color:#f4ecd9;text-decoration:none;border:1px solid rgba(244,236,217,.7);
+  border-radius:999px;padding:10px 18px;background:rgba(33,53,69,.18);backdrop-filter:blur(7px);
+  font-size:.85rem
+}
+#nav{
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;opacity:0;transform:translateY(8px);
+  transition:opacity 1.2s ease,transform 1.2s ease
+}
+#nav.visible{opacity:1;transform:none}
+#nav a{
+  pointer-events:auto;text-decoration:none;color:#f7f1e5;border:1px solid rgba(247,241,229,.52);
+  border-radius:999px;padding:9px 14px;background:rgba(31,42,48,.26);backdrop-filter:blur(6px);font-size:.78rem
+}
+#nav a.primary{background:#f1e8d6;color:#18323c;border-color:#f1e8d6}
+#hint{
+  position:absolute;left:50%;bottom:76px;transform:translateX(-50%);z-index:9;
+  color:rgba(38,46,49,.58);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;
+  opacity:0;transition:opacity 1s ease;white-space:nowrap
+}
 #hint.visible{opacity:1}
-#artCard{position:absolute;z-index:60;left:50%;bottom:26px;transform:translate(-50%,30px);width:min(92vw,420px);
-background:rgba(248,244,234,.96);color:#17313b;border-radius:18px;box-shadow:0 18px 60px rgba(0,0,0,.35);padding:13px;
-opacity:0;pointer-events:none;transition:.28s ease}
-#artCard.visible{opacity:1;transform:translate(-50%,0);pointer-events:auto}
-#artCard img{width:100%;max-height:46vh;object-fit:contain;display:block;border-radius:12px;background:#ebe5d8}
-#artCard .copy{padding:12px 4px 3px}
-#artCard h2{font:600 1.65rem "Cormorant Garamond",serif;margin:0 0 4px}
-#artCard p{font-size:.77rem;line-height:1.45;color:#536364;margin:0 0 10px}
-#artCard a,#artCard button{border:0;border-radius:999px;padding:9px 14px;font:500 .75rem "Libre Franklin",sans-serif;cursor:pointer}
-#artCard a{background:#17313b;color:#fff;text-decoration:none;display:inline-block}
-#artCard button{background:#ded5c1;color:#17313b;margin-left:6px}
-@media(max-width:720px){
-  #ui{padding-left:22px;padding-right:22px}
-  .logo{width:72px;height:72px}
-  h1{font-size:clamp(2.7rem,13vw,4.8rem)}
-  .lead{font-size:.95rem}
+#card{
+  position:absolute;z-index:30;left:50%;bottom:24px;transform:translate(-50%,22px);
+  width:min(92vw,420px);background:rgba(249,247,241,.98);color:#18323c;border-radius:16px;
+  padding:12px;box-shadow:0 18px 55px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:.25s ease
 }
-@media(prefers-reduced-motion:reduce){
-  #sealIntro{display:none}#fade{opacity:0!important}.top,.bottom,#hint{opacity:1!important;transform:none!important}
-}
-
-#galleryFallback{position:absolute;inset:0;z-index:0;overflow:hidden;background:#ddd3be;perspective:850px}
-#galleryFallback .fb-ceiling{position:absolute;left:18%;right:18%;top:0;height:32%;background:linear-gradient(#eee5d2,#d6c8b0);
-clip-path:polygon(22% 0,78% 0,100% 100%,0 100%)}
-#galleryFallback .fb-floor{position:absolute;left:10%;right:10%;bottom:0;height:48%;background:
-repeating-linear-gradient(105deg,#6a4933 0 8px,#76523a 8px 16px,#60412e 16px 24px);
-clip-path:polygon(28% 0,72% 0,100% 100%,0 100%)}
-#galleryFallback .fb-left,#galleryFallback .fb-right{position:absolute;top:0;bottom:0;width:42%;background:
-linear-gradient(#e6dcc7 0 68%,#6a303c 68% 100%)}
-#galleryFallback .fb-left{left:0;clip-path:polygon(0 0,100% 27%,72% 100%,0 100%)}
-#galleryFallback .fb-right{right:0;clip-path:polygon(0 27%,100% 0,100% 100%,28% 100%)}
-#galleryFallback .fb-end{position:absolute;left:36%;right:36%;top:25%;bottom:28%;background:#213545;
-display:grid;place-items:center;box-shadow:0 0 0 9px rgba(184,147,95,.65)}
-#galleryFallback .fb-end img{width:86%;height:auto;object-fit:contain}
-canvas{position:absolute;inset:0;z-index:1}
-
-
-#galleryFallback{background:#e5dccb!important}
-#galleryFallback::before{
-  content:"";position:absolute;left:23%;right:23%;top:2%;height:19%;
-  background:
-    linear-gradient(90deg,transparent 0 7%,rgba(118,111,99,.45) 7% 9%,transparent 9% 24%,rgba(118,111,99,.45) 24% 26%,transparent 26% 41%,rgba(118,111,99,.45) 41% 43%,transparent 43% 58%,rgba(118,111,99,.45) 58% 60%,transparent 60% 75%,rgba(118,111,99,.45) 75% 77%,transparent 77%),
-    linear-gradient(rgba(255,255,255,.92),rgba(232,228,216,.88));
-  clip-path:polygon(16% 0,84% 0,100% 100%,0 100%);
-  box-shadow:0 12px 28px rgba(0,0,0,.08)
-}
-#galleryFallback .fb-left::before,#galleryFallback .fb-right::before{
-  content:"";position:absolute;top:33%;width:31%;height:23%;
-  background:
-    linear-gradient(#f5f1e7,#f5f1e7) padding-box,
-    linear-gradient(135deg,#b48a4e,#3d2a20) border-box;
-  border:10px solid transparent;box-shadow:0 8px 20px rgba(0,0,0,.2)
-}
-#galleryFallback .fb-left::before{right:20%}
-#galleryFallback .fb-right::before{left:20%}
-#galleryFallback .fb-left::after,#galleryFallback .fb-right::after{
-  content:"";position:absolute;top:63%;width:24%;height:17%;
-  background:#8d6d58;border:7px solid #3d2a20;box-shadow:0 6px 16px rgba(0,0,0,.18)
-}
-#galleryFallback .fb-left::after{right:10%}
-#galleryFallback .fb-right::after{left:10%}
-
-
-/* v2.5 architectural gallery */
-#galleryFallback{
-  background:#e9e4da!important;
-  perspective:1100px;
-}
-#galleryFallback .fb-ceiling{
-  left:13%;right:13%;top:0;height:31%;
-  background:
-    repeating-linear-gradient(90deg,rgba(88,72,57,.38) 0 3px,transparent 3px 15%),
-    repeating-linear-gradient(0deg,rgba(88,72,57,.28) 0 3px,transparent 3px 34%),
-    linear-gradient(#f5f2eb,#ded8cd)!important;
-  clip-path:polygon(18% 0,82% 0,100% 100%,0 100%);
-  box-shadow:inset 0 -18px 28px rgba(72,55,40,.12);
-}
-#galleryFallback .fb-floor{
-  left:0;right:0;bottom:0;height:48%;
-  background:
-    repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 74px),
-    repeating-linear-gradient(0deg,#704c34 0 9px,#7d573c 9px 18px,#68462f 18px 27px)!important;
-  clip-path:polygon(29% 0,71% 0,100% 100%,0 100%);
-  box-shadow:inset 0 24px 45px rgba(35,22,15,.25);
-}
-#galleryFallback .fb-left,#galleryFallback .fb-right{
-  top:0;bottom:0;width:46%;
-  background:
-    linear-gradient(90deg,rgba(255,255,255,.13),transparent 22%),
-    linear-gradient(#d9d2c6 0 66%,#4a4039 66% 68%,#d8d0c4 68% 100%)!important;
-}
-#galleryFallback .fb-left{clip-path:polygon(0 0,100% 28%,70% 100%,0 100%)}
-#galleryFallback .fb-right{clip-path:polygon(0 28%,100% 0,100% 100%,30% 100%)}
-#galleryFallback .fb-end{
-  left:35%;right:35%;top:26%;bottom:29%;
-  background:linear-gradient(145deg,#d8d0c3,#eee9df)!important;
-  box-shadow:inset 0 0 0 2px rgba(85,68,54,.12),0 0 28px rgba(0,0,0,.10)!important;
-  display:grid;place-items:center;
-}
-#galleryFallback .fb-left::before,#galleryFallback .fb-right::before{
-  top:30%;width:29%;height:25%;
-  background:
-    linear-gradient(145deg,#e9d8b0,#b68b52) padding-box,
-    linear-gradient(135deg,#7a552c,#d8b66c,#5d3b1e) border-box!important;
-  border:10px solid transparent!important;
-  box-shadow:0 10px 24px rgba(0,0,0,.24)!important;
-}
-#galleryFallback .fb-left::after,#galleryFallback .fb-right::after{
-  top:61%;width:25%;height:18%;
-  background:#efe8da!important;
-  border:9px solid #352b25!important;
-  box-shadow:0 8px 22px rgba(0,0,0,.22)!important;
-}
-.architectural-mark{
-  position:relative;width:150px;height:150px;color:#8b7350;
-  display:flex;align-items:center;justify-content:center;
-  font-family:"Cormorant Garamond",Georgia,serif;
-}
-.architectural-mark:before,.architectural-mark:after{
-  content:"";position:absolute;border:1px solid #9d8869;border-radius:50%;
-  inset:11px;
-}
-.architectural-mark:after{inset:24px}
-.architectural-mark .vm-v{font-size:64px;transform:translate(-8px,-5px)}
-.architectural-mark .vm-m{font-size:55px;transform:translate(-22px,16px)}
-.architectural-mark i{
-  position:absolute;left:21px;right:21px;bottom:-7px;height:1px;background:#9d8869;
-}
-.architectural-mark b{
-  position:absolute;bottom:-28px;left:0;right:0;text-align:center;
-  font:500 9px/1 Arial,sans-serif;letter-spacing:.38em;padding-left:.38em;
-}
-/* Keep the post-cinematic interface subordinate to the gallery */
-#bottomUI.visible{
-  background:linear-gradient(180deg,transparent,rgba(21,27,30,.68))!important;
-}
-#bottomUI .hero-copy,#bottomUI h1,#bottomUI p{
-  max-width:520px;
-}
-@media(max-width:700px){
-  #bottomUI h1{font-size:clamp(2.1rem,9vw,3.4rem)!important;line-height:.94!important}
-  #bottomUI p{font-size:.98rem!important;line-height:1.45!important;max-width:88vw}
-  #bottomUI{padding-bottom:max(24px,env(safe-area-inset-bottom))!important}
-}
-
-
-#wallBrand{
-  position:absolute;z-index:4;left:50%;top:37%;transform:translate(-50%,-50%);
-  opacity:0;pointer-events:none;transition:opacity 1.8s ease;
-  filter:drop-shadow(0 2px 2px rgba(0,0,0,.12));
-}
-#wallBrand.visible{opacity:.82}
-#wallBrand .architectural-mark{transform:scale(.72)}
-@media(max-width:700px){
-  #wallBrand{top:35%}
-  #wallBrand .architectural-mark{transform:scale(.56)}
-}
-
+#card.visible{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+#card img{width:100%;max-height:44vh;object-fit:contain;border-radius:10px;background:#ece7de}
+#card h2{font:600 1.5rem "Cormorant Garamond",serif;margin:10px 2px 4px}
+#card p{font-size:.74rem;line-height:1.45;color:#5d6968;margin:0 2px 10px}
+#card button{border:0;border-radius:999px;background:#ddd4c2;color:#17313b;padding:9px 13px}
 </style>
 </head>
 <body>
 <main id="stage">
-
-  <div id="galleryFallback" aria-hidden="true">
-    <div class="fb-ceiling"></div>
-    <div class="fb-left"></div>
-    <div class="fb-right"></div>
-    <div class="fb-floor"></div>
-    <div class="fb-end"><div class="architectural-mark"><span class="vm-v">V</span><span class="vm-m">M</span><i></i><b>ART STUDIO</b></div></div>
+  <div id="intro">
+    <div class="mark">
+      <img src="vm-seal-clean-transparent-v4.png" alt="V. Murphy Art Studio">
+      <span>Art Studio</span>
+    </div>
   </div>
 
-  <div id="fade"></div>
-  <div id="sealIntro"><div class="mark"><img src="vm-seal-clean-transparent-v4.png" alt="VM seal"><span>Art Studio</span></div></div>
-  <div id="curtain"></div>
   <div id="ui">
-    <div class="top" id="topUI">
-      <a class="logo" href="index.html"><img src="vm-seal-clean-transparent-v4.png" alt="V. Murphy Art Studio"></a>
-      <a class="menu" href="collection.html">Enter Gallery</a>
+    <div id="topbar">
+      <img src="vm-seal-clean-transparent-v4.png" alt="V. Murphy Art Studio">
+      <a href="collection.html">Enter Gallery</a>
     </div>
-    <div class="bottom" id="bottomUI">
-      <div class="kicker">V. Murphy Art Studio</div>
-      <h1>Walk into the collection.</h1>
-      <p class="lead">Explore original V. Murphy works in a private gallery setting. Tap a painting after the camera settles to inspect it more closely.</p>
-      <div class="actions">
-        <a class="primary" href="collection.html">View Collection</a>
-        <a href="story.html">The Artist</a>
-        <a href="create.html">Create Your Own</a>
-        <a href="shop.html">Shop</a>
-      </div>
-    </div>
+    <nav id="nav">
+      <a class="primary" href="collection.html">Collection</a>
+      <a href="story.html">The Artist</a>
+      <a href="create.html">Create Your Own</a>
+      <a href="shop.html">Shop</a>
+    </nav>
   </div>
-  
-<div id="wallBrand" aria-hidden="true">
-  <div class="architectural-mark">
-    <span class="vm-v">V</span><span class="vm-m">M</span><i></i><b>ART STUDIO</b>
-  </div>
-</div>
 
-<div id="hint">Tap a painting to view it</div>
-  <section id="artCard" aria-live="polite">
+  <div id="hint">Tap a painting to view</div>
+
+  <section id="card">
     <img id="cardImage" src="" alt="">
-    <div class="copy">
-      <h2 id="cardTitle"></h2>
-      <p>Original V. Murphy collection artwork. Displayed here without altering the source image.</p>
-      <a href="collection.html">View Collection</a>
-      <button type="button" id="closeCard">Close</button>
-    </div>
+    <h2 id="cardTitle"></h2>
+    <p>Original V. Murphy collection artwork.</p>
+    <button id="closeCard" type="button">Close</button>
   </section>
 </main>
 
-
 <script>
-(function(){
-  const fade=document.getElementById('fade');
-  const intro=document.getElementById('sealIntro');
-  setTimeout(()=>{ if(fade) fade.style.opacity='0'; }, 2800);
-  setTimeout(()=>{ if(intro) intro.style.display='none'; }, 6500);
-  // If 3D fails, reveal the fallback UI after the cinematic intro.
-  setTimeout(()=>{
-    document.getElementById('wallBrand')?.classList.add('visible');
-    document.getElementById('topUI')?.classList.add('visible');
-    document.getElementById('bottomUI')?.classList.add('visible');
-    document.getElementById('hint')?.classList.add('visible');
-  }, 22000);
-})();
+setTimeout(()=>document.getElementById('intro')?.classList.add('hide'),3000);
+setTimeout(()=>{const el=document.getElementById('intro');if(el)el.style.display='none'},5600);
 </script>
 
 <script type="module">
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js';
 
-const stage=document.getElementById('stage');
 const scene=new THREE.Scene();
-scene.background=new THREE.Color(0x213545);
-scene.fog=new THREE.Fog(0xe7dcc5,24,62);
+scene.background=new THREE.Color(0xeeeae3);
+scene.fog=new THREE.Fog(0xeeeae3,40,82);
 
-const camera=new THREE.PerspectiveCamera(50,innerWidth/innerHeight,.1,120);
-camera.position.set(0,1.62,13.8);
+const camera=new THREE.PerspectiveCamera(49,innerWidth/innerHeight,.1,140);
+camera.position.set(0,1.64,15);
 
 const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});
-renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
 renderer.setSize(innerWidth,innerHeight);
 renderer.outputColorSpace=THREE.SRGBColorSpace;
 renderer.shadowMap.enabled=true;
 renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 renderer.toneMapping=THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure=1.28;
-stage.prepend(renderer.domElement);
+renderer.toneMappingExposure=1.18;
+document.getElementById('stage').prepend(renderer.domElement);
 
-scene.add(new THREE.HemisphereLight(0xfff4dc,0x4a4540,2.05));
-const sun=new THREE.DirectionalLight(0xfff4df,2.2);
-sun.position.set(-3,8,8);sun.castShadow=true;scene.add(sun);
-
-const root=new THREE.Group(); scene.add(root);
+const root=new THREE.Group();
+scene.add(root);
 const loader=new THREE.TextureLoader();
-const cream=new THREE.MeshStandardMaterial({color:0xded3be,roughness:.84});
-const cream2=new THREE.MeshStandardMaterial({color:0xeee4cf,roughness:.88});
-const burgundy=new THREE.MeshStandardMaterial({color:0x5d3137,roughness:.88});
-const wood=new THREE.MeshStandardMaterial({color:0x4d2f1e,roughness:.52});
-const gold=new THREE.MeshStandardMaterial({color:0xa47b42,roughness:.42,metalness:.42});
-const darkWood=new THREE.MeshStandardMaterial({color:0x2c1d17,roughness:.57});
-const blackFrame=new THREE.MeshStandardMaterial({color:0x252525,roughness:.5,metalness:.12});
 
-function box(w,h,d,mat,x,y,z){
- const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);m.receiveShadow=true;m.castShadow=true;root.add(m);return m;
+const MAT={
+  plaster:new THREE.MeshStandardMaterial({color:0xe8e4dd,roughness:.92}),
+  plaster2:new THREE.MeshStandardMaterial({color:0xf4f1eb,roughness:.94}),
+  grey:new THREE.MeshStandardMaterial({color:0xbab8b3,roughness:.9}),
+  charcoal:new THREE.MeshStandardMaterial({color:0x2a2d2f,roughness:.88}),
+  oak:new THREE.MeshStandardMaterial({color:0x8a6a50,roughness:.68}),
+  stone:new THREE.MeshStandardMaterial({color:0xd6d3cc,roughness:.82}),
+  brass:new THREE.MeshStandardMaterial({color:0xa98756,roughness:.46,metalness:.32}),
+  black:new THREE.MeshStandardMaterial({color:0x17191a,roughness:.5}),
+  white:new THREE.MeshStandardMaterial({color:0xf7f3eb,roughness:.86})
+};
+
+function box(w,h,d,m,x,y,z){
+  const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);
+  o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;root.add(o);return o;
 }
 
-// Parquet floor: warm and much brighter than v1.
-const floor=box(10,.12,64,wood,0,-.08,-17);
-for(let z=12;z>-48;z-=1.4){
-  for(let x=-4.5;x<4.6;x+=1.2){
-    const slat=box(1.05,.018,.07,gold,x,.001,z);
-    slat.rotation.y=((Math.round((z+48)/1.4)+Math.round(x))%2===0?.62:-.62);
-    slat.material=gold;
-  }
-}
+// ---- ARCHITECTURAL SHELL: based on user's bright gallery reference ----
+box(11,.12,70,MAT.stone,0,-.06,-19);
+box(.18,5.8,70,MAT.plaster,-5.5,2.8,-19);
+box(.18,5.8,70,MAT.plaster,5.5,2.8,-19);
+box(11,.15,70,MAT.plaster2,0,5.62,-19);
 
-// Walls and ceiling.
-box(.18,5.5,64,cream,-5,2.7,-17);
-box(.18,5.5,64,cream,5,2.7,-17);
-box(10,.18,64,cream2,0,5.35,-17);
-
-// Decorative lower wall panelling and mouldings.
+// Large grey exhibition planes along the walls
 for(const side of [-1,1]){
-  for(let z=10;z>-46;z-=4){
-    box(.13,1.05,3.3,burgundy,side*4.88,.68,z);
-    box(.18,.07,3.45,gold,side*4.79,1.25,z);
-    box(.18,.06,3.45,gold,side*4.79,.14,z);
+  for(let z=9;z>-51;z-=8){
+    box(.12,3.4,5.5,MAT.grey,side*5.36,2.65,z);
   }
-  box(.22,.16,64,gold,side*4.82,4.78,-17);
-  box(.22,.16,64,gold,side*4.82,1.43,-17);
 }
 
-// Ceiling coffers and chandeliers.
-for(let z=9;z>-45;z-=5.2){
- box(9.7,.15,.18,gold,0,5.12,z);
- const stem=box(.06,.65,.06,darkWood,0,4.75,z);
- const ring=new THREE.Mesh(new THREE.TorusGeometry(.48,.045,10,32),gold);
- ring.rotation.x=Math.PI/2;ring.position.set(0,4.34,z);root.add(ring);
- for(let a=0;a<6;a++){
-   const ang=a*Math.PI/3;
-   const bulb=new THREE.PointLight(0xffdeb0,1.05,7.5,2);
-   bulb.position.set(Math.cos(ang)*.46,4.34, z+Math.sin(ang)*.46);
-   scene.add(bulb);
- }
+// Deep architectural pilasters / returns
+for(let z=12;z>-52;z-=8){
+  for(const side of [-1,1]){
+    box(.55,5.1,.72,MAT.plaster2,side*5.15,2.55,z);
+  }
 }
 
-// Entrance doors visible from black.
-const doors=new THREE.Group();root.add(doors);
-const doorMat=new THREE.MeshStandardMaterial({color:0x32231d,roughness:.58});
-const leftDoor=new THREE.Mesh(new THREE.BoxGeometry(2.25,4.35,.22),doorMat);
-leftDoor.position.set(-1.15,2.15,12.7);leftDoor.rotation.y=0;doors.add(leftDoor);
-const rightDoor=leftDoor.clone();rightDoor.position.x=1.15;doors.add(rightDoor);
-for(const d of [leftDoor,rightDoor]){
-  const trim=new THREE.Mesh(new THREE.BoxGeometry(1.65,3.25,.05),gold);
-  trim.position.z=-.14;d.add(trim);
-}
-doors.userData={left:leftDoor,right:rightDoor};
-
-// Principal gallery end room.
-box(10,5.5,.25,cream2,0,2.7,-49);
-box(7.3,.16,.18,gold,0,4.75,-48.8);
-for(const x of [-3.6,3.6]){
-  box(.55,5.1,.55,cream2,x,2.55,-48.4);
-  box(.7,.12,.7,gold,x,4.9,-48.4);
+// Central skylight like the reference image
+const sky=new THREE.MeshBasicMaterial({color:0xfffdf8,toneMapped:false});
+for(let z=11;z>-50;z-=7.5){
+  const p=new THREE.Mesh(new THREE.PlaneGeometry(6.5,5.6),sky);
+  p.rotation.x=Math.PI/2;p.position.set(0,5.51,z);root.add(p);
+  box(7.0,.10,.12,MAT.grey,0,5.48,z-2.65);
+  box(7.0,.10,.12,MAT.grey,0,5.48,z+2.65);
+  for(let x=-3;x<=3;x+=1.5) box(.10,.11,5.35,MAT.grey,x,5.47,z);
 }
 
-// Central navy feature panel with the exact approved staggered VM seal.
-const featurePanelMat=new THREE.MeshStandardMaterial({color:0x213545,roughness:.82});
-box(4.15,4.45,.16,featurePanelMat,0,2.55,-48.72);
-const vmTex=loader.load('vm-seal-clean-transparent-v4.png');
-vmTex.colorSpace=THREE.SRGBColorSpace;
-const vmSealWall=new THREE.Mesh(
-  new THREE.PlaneGeometry(3.45,2.25),
-  new THREE.MeshBasicMaterial({map:vmTex,transparent:true,alphaTest:.02,toneMapped:false})
-);
-vmSealWall.position.set(0,3.0,-48.60);
-root.add(vmSealWall);
+// Pale stone floor grid
+const seam=new THREE.MeshBasicMaterial({color:0xb8b4ad});
+for(let x=-5.1;x<=5.1;x+=1.28) box(.014,.012,70,seam,x,.01,-19);
+for(let z=14;z>-54;z-=1.9) box(10.3,.012,.018,seam,0,.012,z);
 
-// Cream ART STUDIO inscription below the physical seal panel.
-const labelCanvas=document.createElement('canvas');
-labelCanvas.width=1200;labelCanvas.height=220;
-const lc=labelCanvas.getContext('2d');
-lc.clearRect(0,0,labelCanvas.width,labelCanvas.height);
-lc.fillStyle='#efe7d3';
-lc.font='52px Arial';
-lc.textAlign='center';
-lc.letterSpacing='18px';
-lc.fillText('—  A R T   S T U D I O  —',600,125);
-const labelTex=new THREE.CanvasTexture(labelCanvas);
-labelTex.colorSpace=THREE.SRGBColorSpace;
-const labelMesh=new THREE.Mesh(
-  new THREE.PlaneGeometry(3.5,.64),
-  new THREE.MeshBasicMaterial({map:labelTex,transparent:true,toneMapped:false})
-);
-labelMesh.position.set(0,1.52,-48.59);
-root.add(labelMesh);
+// Dark timber / slatted side bays inspired by second reference
+for(const side of [-1,1]){
+  for(let z=5;z>-49;z-=16){
+    box(.28,4.35,5.4,MAT.charcoal,side*5.15,2.35,z);
+    for(let dz=-2.15;dz<=2.15;dz+=.28){
+      box(.06,3.9,.08,MAT.oak,side*4.97,2.35,z+dz);
+    }
+  }
+}
 
+// Lighting
+scene.add(new THREE.HemisphereLight(0xfffbf2,0x77706a,2.0));
+const sun=new THREE.DirectionalLight(0xfff5dd,2.1);
+sun.position.set(-4,10,9);sun.castShadow=true;scene.add(sun);
+
+// ---- ARTWORK ----
 const ART=[
  {file:'courtyard-cafe.jpeg',title:'Courtyard Café'},
  {file:'blue-awnings.jpeg',title:'Blue Awnings'},
@@ -406,157 +205,141 @@ const ART=[
  {file:'village-garden-2013.jpeg',title:'Village Garden, 2013'},
  {file:'the-square-reference.jpeg',title:'The Square'}
 ];
-
-// Random order each visit, but every actual painting appears.
 const shuffled=[...ART].sort(()=>Math.random()-.5);
-const galleryWorks=[];
-const frames=[gold,darkWood,blackFrame,gold,darkWood,blackFrame];
+const clickables=[];
 
-function makeArtwork(item,side,z,scale=1,frameMat=gold){
-  const group=new THREE.Group();
-  const fw=1.85*scale,fh=2.35*scale;
-  const frame= new THREE.Mesh(new THREE.BoxGeometry(fw,fh,.16),frameMat);
-  frame.castShadow=true;frame.receiveShadow=true;
-  group.add(frame);
+function addArtwork(item,side,z,frameKind=0,scale=1){
+  const g=new THREE.Group();
+  const fw=1.75*scale,fh=2.22*scale;
+  const frameMat=[MAT.black,MAT.brass,MAT.oak][frameKind%3];
+
+  const frame=new THREE.Mesh(new THREE.BoxGeometry(fw,fh,.15),frameMat);
+  frame.castShadow=true;g.add(frame);
+
+  const mount=new THREE.Mesh(new THREE.PlaneGeometry(fw*.90,fh*.90),
+    new THREE.MeshBasicMaterial({color:0xf7f3eb,toneMapped:false}));
+  mount.position.z=.081;g.add(mount);
 
   const tex=loader.load(item.file);
   tex.colorSpace=THREE.SRGBColorSpace;
   tex.anisotropy=renderer.capabilities.getMaxAnisotropy();
 
-  // Fit artwork inside frame without cropping the source.
-  const artMat=new THREE.MeshBasicMaterial({map:tex,toneMapped:false});
-  const art=new THREE.Mesh(new THREE.PlaneGeometry(fw*.83,fh*.83),artMat);
-  art.position.z=.086;art.userData={item,group};
-  group.add(art);
+  // Preserve source artwork with no relighting or regeneration.
+  const art=new THREE.Mesh(new THREE.PlaneGeometry(fw*.79,fh*.79),
+    new THREE.MeshBasicMaterial({map:tex,toneMapped:false}));
+  art.position.z=.087;art.userData.item=item;g.add(art);clickables.push(art);
 
-  const mount=new THREE.Mesh(new THREE.PlaneGeometry(fw*.91,fh*.91),new THREE.MeshBasicMaterial({color:0xf3eee1,toneMapped:false}));
-  mount.position.z=.081;group.add(mount);group.remove(art);group.add(mount);group.add(art);
+  g.position.set(side*5.27,2.62,z);
+  g.rotation.y=side===-1?Math.PI/2:-Math.PI/2;
+  root.add(g);
 
-  group.position.set(side*4.76,2.85,z);
-  group.rotation.y=side===-1?Math.PI/2:-Math.PI/2;
-  root.add(group);
-  galleryWorks.push(art);
-
-  const bar=box(.08,.07,.72,frameMat,side*4.45,4.28,z);
+  // Individual picture light
+  const bar=box(.08,.055,.62,frameMat,side*4.93,4.12,z);
   bar.rotation.y=side===-1?Math.PI/2:-Math.PI/2;
-
-  const spot=new THREE.SpotLight(0xffdfb8,4.7,6.6,Math.PI/6,.55,1.25);
-  spot.position.set(side*4.15,4.12,z+.05);
-  spot.target.position.set(side*4.74,2.75,z);
+  const spot=new THREE.SpotLight(0xffe4bd,4.0,5.8,Math.PI/7,.55,1.1);
+  spot.position.set(side*4.62,4.0,z);
+  spot.target.position.set(side*5.25,2.58,z);
   scene.add(spot,spot.target);
 }
 
-let zi=8.2;
-for(let i=0;i<10;i++){
-  const item=shuffled[i%shuffled.length];
-  makeArtwork(item,i%2===0?-1:1,zi,(i%3===0?1.05:.92),frames[i%frames.length]);
-  zi-=5.2;
+let zz=8.5;
+for(let i=0;i<12;i++){
+  addArtwork(shuffled[i%shuffled.length],i%2===0?-1:1,zz,i%3,i%4===0?1.06:.92);
+  zz-=4.6;
 }
 
-// Two principal paintings flank the VM seal.
-function endArtwork(item,x,frameMat){
-  const fw=2.05,fh=2.65;
-  const frame=box(fw,fh,.20,frameMat,x,2.78,-48.62);
-  const mount=new THREE.Mesh(new THREE.PlaneGeometry(fw*.88,fh*.88),new THREE.MeshBasicMaterial({color:0xf3eee1,toneMapped:false}));
-  mount.position.set(x,2.78,-48.49);root.add(mount);
-  const tex=loader.load(item.file);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=renderer.capabilities.getMaxAnisotropy();
-  const art=new THREE.Mesh(new THREE.PlaneGeometry(fw*.78,fh*.78),new THREE.MeshBasicMaterial({map:tex,toneMapped:false}));
-  art.position.set(x,2.78,-48.45);art.userData={item};root.add(art);galleryWorks.push(art);
-  const spot=new THREE.SpotLight(0xffdfad,6.2,10,Math.PI/7,.5,1.15);
-  spot.position.set(x,4.75,-42.2);spot.target.position.set(x,2.7,-48.4);scene.add(spot,spot.target);
+// ---- PRINCIPAL GALLERY / END WALL ----
+// NO BLUE PANEL. Cream plaster wall with ONLY the transparent VM seal.
+box(11,5.8,.24,MAT.plaster2,0,2.8,-54);
+
+const sealTex=loader.load('vm-seal-clean-transparent-v4.png');
+sealTex.colorSpace=THREE.SRGBColorSpace;
+const sealPlane=new THREE.Mesh(
+  new THREE.PlaneGeometry(2.7,2.7),
+  new THREE.MeshBasicMaterial({map:sealTex,transparent:true,alphaTest:.02,toneMapped:false})
+);
+sealPlane.position.set(0,3.0,-53.84);
+root.add(sealPlane);
+
+// Two flanking paintings
+function addEndArtwork(item,x,frameMat){
+  const fw=2.1,fh=2.65;
+  box(fw,fh,.16,frameMat,x,2.7,-53.84);
+  const mount=new THREE.Mesh(new THREE.PlaneGeometry(fw*.90,fh*.90),
+    new THREE.MeshBasicMaterial({color:0xf7f3eb,toneMapped:false}));
+  mount.position.set(x,2.7,-53.73);root.add(mount);
+  const tex=loader.load(item.file);tex.colorSpace=THREE.SRGBColorSpace;
+  const art=new THREE.Mesh(new THREE.PlaneGeometry(fw*.79,fh*.79),
+    new THREE.MeshBasicMaterial({map:tex,toneMapped:false}));
+  art.position.set(x,2.7,-53.68);art.userData.item=item;root.add(art);clickables.push(art);
+  const spot=new THREE.SpotLight(0xffe4bd,4.8,8,Math.PI/7,.55,1.1);
+  spot.position.set(x,4.8,-47);spot.target.position.set(x,2.65,-53.5);scene.add(spot,spot.target);
 }
-endArtwork(shuffled[0],-3.0,gold);
-endArtwork(shuffled[1],3.0,darkWood);
+addEndArtwork(shuffled[0],-3.3,MAT.brass);
+addEndArtwork(shuffled[1],3.3,MAT.black);
 
-const sealLight=new THREE.SpotLight(0xffe7c2,4.2,10,Math.PI/5,.58,1.1);
-sealLight.position.set(0,4.8,-42.0);sealLight.target.position.set(0,2.8,-48.5);scene.add(sealLight,sealLight.target);
-
-const raycaster=new THREE.Raycaster();
-const pointer=new THREE.Vector2();
-let interactive=false;
-let settledYaw=0,settledPitch=0;
-const clock=new THREE.Clock();
+// ---- CAMERA JOURNEY ----
 const start=performance.now();
+let interactive=false,yaw=0,pitch=0;
+const ray=new THREE.Raycaster(),pointer=new THREE.Vector2();
 
 function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
-function smoothstep(t){return t*t*(3-2*t)}
+function ease(t){return t*t*(3-2*t)}
 
 function animate(now){
- requestAnimationFrame(animate);
- const sec=(now-start)/1000;
+  requestAnimationFrame(animate);
+  const s=(now-start)/1000;
 
- // 0–3 black -> seal, 3–6 gallery emerges.
- if(sec>2.7) document.getElementById('fade').style.opacity='0';
+  let z=15;
+  if(s>=6 && s<18) z=15-ease((s-6)/12)*43.5;
+  else if(s>=18 && s<22) z=-28.5-ease((s-18)/4)*18.5;
+  else if(s>=22) z=-47+Math.sin(s*.22)*.08;
 
- // Door opening 3–6 sec.
- const doorT=clamp((sec-3)/3,0,1);
- const open=smoothstep(doorT);
- leftDoor.rotation.y=-open*1.18;
- leftDoor.position.x=-1.15-open*.88;
- rightDoor.rotation.y=open*1.18;
- rightDoor.position.x=1.15+open*.88;
+  camera.position.z=z;
+  camera.position.y=1.64+(s>6&&s<22?Math.sin(s*.55)*.02:0);
+  camera.position.x=s<22?Math.sin(s*.26)*.035:yaw*.22;
+  camera.rotation.y+=((s<22?Math.sin(s*.18)*.01:yaw)-camera.rotation.y)*.03;
+  camera.rotation.x+=((s<22?0:pitch)-camera.rotation.x)*.03;
 
- // 6–18 sec travel through main gallery.
- let z=13.8;
- if(sec>=6 && sec<18){
-   const t=smoothstep((sec-6)/12);
-   z=13.8-(t*39.5);
- }else if(sec>=18 && sec<22){
-   // 18–22 sec approach principal gallery.
-   const t=smoothstep((sec-18)/4);
-   z=-25.7-(t*15.0);
- }else if(sec>=22){
-   z=-40.7+Math.sin(sec*.22)*.12;
- }
- camera.position.z=z;
- camera.position.y=1.62 + (sec>6&&sec<22?Math.sin(sec*.65)*.035:0);
- camera.position.x=(sec<22?Math.sin(sec*.33)*.055:settledYaw*.32);
-
- camera.rotation.y += ((sec<22?Math.sin(sec*.23)*.018:settledYaw)-camera.rotation.y)*.035;
- camera.rotation.x += ((sec<22?0:settledPitch)-camera.rotation.x)*.035;
-
- if(sec>=22 && !interactive){
-   interactive=true;
-   document.getElementById('topUI').classList.add('visible');
-   document.getElementById('bottomUI').classList.add('visible');
-   document.getElementById('hint').classList.add('visible');
- }
- renderer.render(scene,camera);
- const fb=document.getElementById('galleryFallback');
- if(fb && !fb.dataset.hiddenBy3d){
-   fb.dataset.hiddenBy3d='1';
-   fb.style.transition='opacity .8s ease';
-   setTimeout(()=>{fb.style.opacity='0';},120);
- }
+  if(s>=22&&!interactive){
+    interactive=true;
+    document.getElementById('topbar').classList.add('visible');
+    document.getElementById('nav').classList.add('visible');
+    document.getElementById('hint').classList.add('visible');
+  }
+  renderer.render(scene,camera);
 }
 requestAnimationFrame(animate);
 
-// Touch/mouse look only after the cinematic settles.
-function setLook(clientX,clientY){
- if(!interactive)return;
- settledYaw=((clientX/innerWidth)-.5)*.18;
- settledPitch=-((clientY/innerHeight)-.5)*.07;
+// subtle look after arrival
+function look(x,y){
+  if(!interactive)return;
+  yaw=((x/innerWidth)-.5)*.12;
+  pitch=-((y/innerHeight)-.5)*.045;
 }
-addEventListener('pointermove',e=>setLook(e.clientX,e.clientY),{passive:true});
-addEventListener('touchmove',e=>{const t=e.touches[0];if(t)setLook(t.clientX,t.clientY)},{passive:true});
+addEventListener('pointermove',e=>look(e.clientX,e.clientY),{passive:true});
+addEventListener('touchmove',e=>{const t=e.touches[0];if(t)look(t.clientX,t.clientY)},{passive:true});
 
+// interactive paintings
 renderer.domElement.addEventListener('pointerup',e=>{
- if(!interactive)return;
- pointer.x=(e.clientX/innerWidth)*2-1;
- pointer.y=-(e.clientY/innerHeight)*2+1;
- raycaster.setFromCamera(pointer,camera);
- const hits=raycaster.intersectObjects(galleryWorks,false);
- if(!hits.length)return;
- const item=hits[0].object.userData.item;
- document.getElementById('cardImage').src=item.file;
- document.getElementById('cardImage').alt=item.title;
- document.getElementById('cardTitle').textContent=item.title;
- document.getElementById('artCard').classList.add('visible');
+  if(!interactive)return;
+  pointer.x=e.clientX/innerWidth*2-1;
+  pointer.y=-(e.clientY/innerHeight)*2+1;
+  ray.setFromCamera(pointer,camera);
+  const hit=ray.intersectObjects(clickables,false)[0];
+  if(!hit)return;
+  const item=hit.object.userData.item;
+  document.getElementById('cardImage').src=item.file;
+  document.getElementById('cardImage').alt=item.title;
+  document.getElementById('cardTitle').textContent=item.title;
+  document.getElementById('card').classList.add('visible');
 });
-document.getElementById('closeCard').addEventListener('click',()=>document.getElementById('artCard').classList.remove('visible'));
+document.getElementById('closeCard').addEventListener('click',()=>document.getElementById('card').classList.remove('visible'));
 
 addEventListener('resize',()=>{
- camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);
+  camera.aspect=innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
 });
 </script>
 </body>
