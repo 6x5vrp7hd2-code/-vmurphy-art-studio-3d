@@ -18,8 +18,7 @@ canvas{display:block;width:100%;height:100%}
 #sealIntro{position:absolute;inset:0;z-index:35;display:grid;place-items:center;pointer-events:none}
 #sealIntro .mark{display:flex;flex-direction:column;align-items:center;gap:16px;opacity:0;transform:scale(.86);
 animation:sealLife 6s ease forwards}
-#sealIntro img{width:min(72vw,420px);height:auto;border-radius:0;object-fit:contain;
-box-shadow:none}
+#sealIntro img{width:min(68vw,390px);height:auto;border-radius:0;object-fit:contain;box-shadow:none;filter:none}
 #sealIntro span{font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;color:#efe7d3;margin-top:-6px}
 @keyframes sealLife{0%{opacity:0;transform:scale(.86)}18%{opacity:1;transform:scale(1)}64%{opacity:1}100%{opacity:0;transform:scale(.96)}}
 #curtain{position:absolute;inset:0;z-index:20;pointer-events:none;background:
@@ -69,11 +68,11 @@ opacity:0;pointer-events:none;transition:.28s ease}
 <body>
 <main id="stage">
   <div id="fade"></div>
-  <div id="sealIntro"><div class="mark"><img src="vm-seal.png" alt="VM seal"><span>Art Studio</span></div></div>
+  <div id="sealIntro"><div class="mark"><img src="vm-seal-transparent.png" alt="VM seal"><span>Art Studio</span></div></div>
   <div id="curtain"></div>
   <div id="ui">
     <div class="top" id="topUI">
-      <a class="logo" href="index.html"><img src="vm-seal.png" alt="V. Murphy Art Studio"></a>
+      <a class="logo" href="index.html"><img src="vm-seal-transparent.png" alt="V. Murphy Art Studio"></a>
       <a class="menu" href="collection.html">Enter Gallery</a>
     </div>
     <div class="bottom" id="bottomUI">
@@ -126,6 +125,7 @@ const sun=new THREE.DirectionalLight(0xfff4df,2.2);
 sun.position.set(-3,8,8);sun.castShadow=true;scene.add(sun);
 
 const root=new THREE.Group(); scene.add(root);
+const loader=new THREE.TextureLoader();
 const cream=new THREE.MeshStandardMaterial({color:0xded3be,roughness:.84});
 const cream2=new THREE.MeshStandardMaterial({color:0xeee4cf,roughness:.88});
 const burgundy=new THREE.MeshStandardMaterial({color:0x5d3137,roughness:.88});
@@ -201,11 +201,11 @@ for(const x of [-3.6,3.6]){
 // Central navy feature panel with the exact approved staggered VM seal.
 const featurePanelMat=new THREE.MeshStandardMaterial({color:0x213545,roughness:.82});
 box(4.15,4.45,.16,featurePanelMat,0,2.55,-48.72);
-const vmTex=loader.load('vm-seal.png');
+const vmTex=loader.load('vm-seal-transparent.png');
 vmTex.colorSpace=THREE.SRGBColorSpace;
 const vmSealWall=new THREE.Mesh(
   new THREE.PlaneGeometry(3.45,2.25),
-  new THREE.MeshBasicMaterial({map:vmTex,toneMapped:false})
+  new THREE.MeshBasicMaterial({map:vmTex,transparent:true,alphaTest:.02,toneMapped:false})
 );
 vmSealWall.position.set(0,3.0,-48.60);
 root.add(vmSealWall);
