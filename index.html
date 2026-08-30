@@ -1,59 +1,322 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Original V. Murphy paintings, prints, framing, canvas, digital downloads, Studio Editions and trade licensing."><title>V. Murphy Art Studio | Original Art & Studio Editions</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Libre+Franklin:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css"></head>
-<body class="home-page">
-<header class="site-header seal-header homepage-header-no-seal">
-  <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">Menu</button>
-  <nav class="nav">
-    <a href="story.html">Story</a><a href="collection.html">Collection</a><a href="shop.html">Shop</a>
-    <a href="create.html">Create Your Own</a><a href="trade.html">Trade &amp; Licensing</a>
-    <a href="faq.html">FAQ</a><a href="contact.html">Contact</a>
-  </nav>
-</header><main>
-<section class="home-hero approved-home-hero">
-  <div class="approved-hero-background" aria-hidden="true"></div>
-
-  <div class="approved-seal-lockup">
-    <div class="hero-seal-stage"><img src="vm-seal.png" class="hero-seal" alt="VM seal"></div>
-    <div class="hero-art-studio-stage"><div class="hero-art-studio">ART STUDIO</div></div>
-  </div>
-
-  <div class="approved-art-band" aria-label="Selected V. Murphy paintings">
-    <div class="art-band-slide art-band-one"></div>
-    <div class="art-band-slide art-band-two"></div>
-    <div class="art-band-slide art-band-three"></div>
-    <div class="art-band-edge-fade"></div>
-  </div>
-
-  <div class="approved-message">
-    <p class="eyebrow">A family collection, thoughtfully continued.</p>
-    <h1>Art with a past. New ways to make it yours.</h1>
-    <p class="lead">Discover original works by V. Murphy, choose how they are printed and framed, or create a new Studio Edition from a guided set of choices.</p>
-    <div class="actions">
-      <a class="button primary" href="collection.html">Explore the collection</a>
-      <a class="button ghost" href="create.html">Create your own</a>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="description" content="V. Murphy Art Studio — immersive gallery entrance.">
+  <title>V. Murphy Art Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Libre+Franklin:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root{
+      --ink:#0e1f2a;
+      --cream:#efe7d2;
+      --gold:#b99055;
+      --wine:#5b2028;
+      --deep:#071118;
+    }
+    html,body{margin:0;min-height:100%;background:#071118;color:var(--cream)}
+    body.gallery-home{overflow:hidden}
+    #gallery-stage{position:fixed;inset:0;overflow:hidden;background:
+      radial-gradient(circle at 50% 40%,rgba(255,225,175,.08),transparent 35%),
+      linear-gradient(#0a151c,#071118 62%,#04080b)}
+    #gallery-stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+    .gallery-vignette{position:absolute;inset:0;pointer-events:none;background:
+      linear-gradient(90deg,rgba(0,0,0,.46),transparent 12%,transparent 88%,rgba(0,0,0,.46)),
+      linear-gradient(180deg,rgba(0,0,0,.30),transparent 24%,transparent 74%,rgba(0,0,0,.58));
+      z-index:4}
+    .gallery-grain{position:absolute;inset:0;pointer-events:none;z-index:5;opacity:.11;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E")}
+    .intro-overlay{position:absolute;inset:0;z-index:10;display:grid;place-items:center;pointer-events:none;
+      background:radial-gradient(circle at center,rgba(6,15,21,.10),rgba(6,15,21,.72) 72%,rgba(4,9,13,.94))}
+    .intro-mark{display:flex;flex-direction:column;align-items:center;gap:18px;animation:introFade 7s ease forwards}
+    .intro-mark img{width:min(31vw,170px);height:min(31vw,170px);border-radius:50%;object-fit:cover;
+      box-shadow:0 0 0 1px rgba(239,231,210,.34),0 12px 50px rgba(0,0,0,.5)}
+    .intro-mark span{font-family:"Libre Franklin",sans-serif;letter-spacing:.34em;text-transform:uppercase;font-size:.72rem;color:#efe7d2}
+    @keyframes introFade{
+      0%{opacity:0;transform:scale(.82)}
+      13%{opacity:1;transform:scale(1)}
+      58%{opacity:1}
+      100%{opacity:0;transform:scale(.94)}
+    }
+    .gallery-ui{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;justify-content:space-between;
+      padding:max(20px,env(safe-area-inset-top)) 24px max(24px,env(safe-area-inset-bottom));pointer-events:none}
+    .gallery-top{display:flex;align-items:center;justify-content:space-between}
+    .gallery-logo{width:80px;height:80px;border-radius:50%;overflow:hidden;opacity:0;animation:uiIn 1.2s ease 6s forwards;pointer-events:auto}
+    .gallery-logo img{width:100%;height:100%;object-fit:cover;display:block}
+    .gallery-menu{pointer-events:auto;opacity:0;animation:uiIn 1.2s ease 6.2s forwards;border:1px solid rgba(239,231,210,.72);
+      background:rgba(7,17,24,.28);backdrop-filter:blur(5px);color:#f4edda;border-radius:999px;padding:12px 22px;
+      text-decoration:none;font-family:"Libre Franklin",sans-serif;font-size:.95rem}
+    .gallery-bottom{display:flex;flex-direction:column;gap:14px;align-items:flex-start;max-width:760px;opacity:0;animation:uiIn 1.6s ease 7s forwards}
+    .gallery-kicker{font-family:"Libre Franklin",sans-serif;letter-spacing:.22em;text-transform:uppercase;font-size:.72rem;color:#d7c6a9}
+    .gallery-bottom h1{margin:0;font:600 clamp(2.5rem,7vw,6.4rem)/.92 "Cormorant Garamond",serif;max-width:780px;text-wrap:balance}
+    .gallery-bottom p{margin:0;max-width:650px;font:300 clamp(1rem,2.1vw,1.25rem)/1.55 "Libre Franklin",sans-serif;color:#e9e0cf}
+    .gallery-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;pointer-events:auto}
+    .gallery-actions a{color:#f3ead7;text-decoration:none;border:1px solid rgba(239,231,210,.5);border-radius:999px;
+      padding:11px 18px;background:rgba(7,17,24,.30);backdrop-filter:blur(4px);font:400 .88rem "Libre Franklin",sans-serif}
+    .gallery-actions a.primary{background:rgba(239,231,210,.92);color:#17313b;border-color:transparent}
+    .skip-intro{position:absolute;right:24px;bottom:max(24px,env(safe-area-inset-bottom));z-index:30;color:#d8ccba;
+      font:400 .78rem "Libre Franklin",sans-serif;text-decoration:none;opacity:.72}
+    @keyframes uiIn{to{opacity:1}}
+    .gallery-note{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:8;font:300 .68rem "Libre Franklin",sans-serif;
+      letter-spacing:.12em;text-transform:uppercase;color:rgba(239,231,210,.45);white-space:nowrap}
+    @media (max-width:720px){
+      .gallery-ui{padding-left:22px;padding-right:22px}
+      .gallery-logo{width:76px;height:76px}
+      .gallery-bottom{padding-right:20px}
+      .gallery-bottom h1{font-size:clamp(2.55rem,13vw,4.6rem)}
+      .gallery-bottom p{font-size:.98rem}
+      .gallery-actions a{font-size:.82rem}
+      .skip-intro{display:none}
+    }
+    @media (prefers-reduced-motion: reduce){
+      .intro-mark{animation:none;opacity:0}
+      .gallery-logo,.gallery-menu,.gallery-bottom{animation:none;opacity:1}
+    }
+  </style>
+</head>
+<body class="gallery-home">
+  <main id="gallery-stage" aria-label="Immersive V. Murphy Art Studio gallery entrance">
+    <div class="gallery-vignette"></div>
+    <div class="gallery-grain"></div>
+    <div class="intro-overlay" id="intro-overlay">
+      <div class="intro-mark">
+        <img src="vm-seal.png" alt="V. Murphy Art Studio seal">
+        <span>Art Studio</span>
+      </div>
     </div>
-  </div>
-</section>
 
-<section class="warm-band"><div class="floating-art art-a"><img src="courtyard-cafe.jpeg" alt=""></div><div class="floating-art art-b"><img src="red-composition.jpeg" alt=""></div>
-<div class="content-width home-copy"><p class="eyebrow dark">The original collection</p><h2>Painted for the love of painting.</h2>
-<p>V. Murphy painted as a long-standing hobby rather than as a commercial artist. The surviving archive is finite: a few dozen works created over years of personal practice. The studio now exists to preserve, catalogue and share that body of work without inventing history around it.</p>
-<a class="text-link" href="story.html">Read the story →</a></div></section>
+    <div class="gallery-ui">
+      <div class="gallery-top">
+        <a class="gallery-logo" href="index.html"><img src="vm-seal.png" alt="V. Murphy Art Studio"></a>
+        <a class="gallery-menu" href="collection.html">Enter Gallery</a>
+      </div>
+      <div class="gallery-bottom">
+        <div class="gallery-kicker">V. Murphy Art Studio</div>
+        <h1>Walk into the collection.</h1>
+        <p>A cinematic entrance through a private picture gallery, with works from the V. Murphy collection lining the walls as the camera moves forward.</p>
+        <div class="gallery-actions">
+          <a class="primary" href="collection.html">View the Collection</a>
+          <a href="story.html">The Artist</a>
+          <a href="create.html">Create Your Own</a>
+          <a href="shop.html">Shop</a>
+        </div>
+      </div>
+    </div>
+    <a class="skip-intro" href="collection.html">Skip intro →</a>
+    <div class="gallery-note">Swipe or move your phone slightly to look around</div>
+  </main>
 
-<section class="service-portals content-width">
-<a class="portal-card original-card" href="collection.html"><span class="eyebrow">Original Collection</span><h3>Discover the archive</h3><p>Street scenes, architecture, village studies and abstract works painted by V. Murphy.</p></a>
-<a class="portal-card shop-card" href="shop.html"><span class="eyebrow">Print &amp; Finish</span><h3>Choose how you own it</h3><p>Fine-art paper, framed editions, canvas, digital files, gift formats and curated sets.</p></a>
-<a class="portal-card create-card" href="create.html"><span class="eyebrow">Studio Editions</span><h3>Create your own</h3><p>Build a new composition from guided choices, then choose print, frame, canvas or personal-use download.</p></a>
-<a class="portal-card trade-card" href="trade.html"><span class="eyebrow">Business &amp; Hospitality</span><h3>Trade and licensing</h3><p>Coordinated art packages, image licensing, commercial projects and interior collections.</p></a></section>
+  <script type="module">
+    import * as THREE from 'https://unpkg.com/three@0.170.0/build/three.module.js';
 
-<section class="difference-band"><div class="content-width difference-grid"><div><p class="eyebrow">Two clearly separated collections</p><h2>Original work stays original.</h2></div>
-<div class="difference-copy"><p><strong>The V. Murphy Original Collection</strong> contains only paintings actually created by V. Murphy.</p><p><strong>V. Murphy Studio Editions</strong> contains new digitally developed compositions created by the studio, including customer-directed pieces. They are never presented as paintings by V. Murphy.</p></div></div></section>
-<section class="editorial-strip"><div class="editorial-photo bg-hospitality"></div><div class="editorial-copy"><p class="eyebrow dark">Beyond the print</p><h2>One image can live in many ways.</h2>
-<p>Framed wall art, canvas, limited editions, personalised gifts, digital stationery, hospitality interiors, corporate collections and licensed creative use.</p><a class="text-link" href="shop.html">Explore services →</a></div></section>
-</main>
-<footer class="site-footer"><div class="footer-brand"><strong>V. Murphy Art Studio</strong><span>Original family collection • Studio Editions • Prints • Licensing</span></div>
-<div class="footer-links"><a href="collection.html">Collection</a><a href="shop.html">Shop</a><a href="create.html">Create Your Own</a><a href="trade.html">Trade</a><a href="legal.html">Terms &amp; Licensing</a></div>
-<p class="copyright">© <span id="year"></span> V. Murphy Art Studio. Artwork © V. Murphy. Studio Editions are identified separately from the original V. Murphy collection.</p></footer><script src="script.js"></script></body></html>
+    const stage = document.getElementById('gallery-stage');
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x081118, 0.032);
+
+    const camera = new THREE.PerspectiveCamera(52, innerWidth/innerHeight, 0.1, 120);
+    camera.position.set(0, 1.72, 10.5);
+
+    const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true, powerPreference:'high-performance'});
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.0;
+    stage.prepend(renderer.domElement);
+
+    const hemi = new THREE.HemisphereLight(0xd6c3a5, 0x111820, 1.1);
+    scene.add(hemi);
+
+    // Hall geometry
+    const hall = new THREE.Group();
+    scene.add(hall);
+
+    const wallMat = new THREE.MeshStandardMaterial({color:0x3a2830, roughness:.92});
+    const floorMat = new THREE.MeshStandardMaterial({color:0x2b211a, roughness:.36, metalness:.08});
+    const trimMat = new THREE.MeshStandardMaterial({color:0x8b7048, roughness:.62, metalness:.18});
+    const ceilingMat = new THREE.MeshStandardMaterial({color:0x181617, roughness:.88});
+
+    const floor = new THREE.Mesh(new THREE.PlaneGeometry(7.8, 54), floorMat);
+    floor.rotation.x = -Math.PI/2; floor.position.set(0,0,-14);
+    hall.add(floor);
+
+    const ceiling = new THREE.Mesh(new THREE.PlaneGeometry(7.8, 54), ceilingMat);
+    ceiling.rotation.x = Math.PI/2; ceiling.position.set(0,4.4,-14);
+    hall.add(ceiling);
+
+    const leftWall = new THREE.Mesh(new THREE.PlaneGeometry(54,4.4), wallMat);
+    leftWall.rotation.y = Math.PI/2; leftWall.position.set(-3.9,2.2,-14);
+    hall.add(leftWall);
+
+    const rightWall = new THREE.Mesh(new THREE.PlaneGeometry(54,4.4), wallMat);
+    rightWall.rotation.y = -Math.PI/2; rightWall.position.set(3.9,2.2,-14);
+    hall.add(rightWall);
+
+    // Cornice and skirting
+    for (const x of [-3.84,3.84]) {
+      const cornice = new THREE.Mesh(new THREE.BoxGeometry(.12,.16,54), trimMat);
+      cornice.position.set(x,4.15,-14); hall.add(cornice);
+      const skirt = new THREE.Mesh(new THREE.BoxGeometry(.12,.18,54), trimMat);
+      skirt.position.set(x,.12,-14); hall.add(skirt);
+    }
+
+    // Ceiling beams / bays
+    for(let z=7; z>-41; z-=4){
+      const beam = new THREE.Mesh(new THREE.BoxGeometry(7.7,.12,.18), trimMat);
+      beam.position.set(0,4.17,z); hall.add(beam);
+    }
+
+    const loader = new THREE.TextureLoader();
+
+    // v1 uses procedural "painting" canvases so the 3D gallery works immediately
+    // without requiring any new image assets. These are placeholders only.
+    // In the next pass they can be replaced one-for-one with the real V. Murphy paintings.
+    function makePaintingTexture(seed){
+      const c=document.createElement('canvas');
+      c.width=900; c.height=1100;
+      const x=c.getContext('2d');
+      const palettes=[
+        ['#e8d7b5','#7b3341','#183a4a','#be7c4d','#e8c77a'],
+        ['#d9e2d3','#24464d','#79998d','#c28362','#f0e8d3'],
+        ['#efe0d0','#652d48','#af6879','#27485a','#d8ad68'],
+        ['#e3dbca','#355f6c','#b45f45','#d6a45f','#758f79'],
+        ['#d8d0c0','#212e49','#6c567f','#b46b3d','#dfc7a2']
+      ];
+      const p=palettes[seed%palettes.length];
+      x.fillStyle=p[0];x.fillRect(0,0,c.width,c.height);
+      for(let i=0;i<24;i++){
+        const yy=(i/24)*c.height;
+        x.globalAlpha=.45;
+        x.fillStyle=p[(i+seed)%p.length];
+        x.beginPath();
+        x.moveTo(-80,yy+Math.sin(i*.8+seed)*80);
+        x.bezierCurveTo(250,yy-150,620,yy+160,980,yy-40);
+        x.lineWidth=38+(i%5)*13;
+        x.strokeStyle=p[(i+1+seed)%p.length];
+        x.stroke();
+      }
+      x.globalAlpha=.8;
+      for(let i=0;i<12;i++){
+        x.fillStyle=p[(i+2)%p.length];
+        x.beginPath();
+        x.arc(120+(i*137)%760,120+(i*181)%860,24+(i%4)*22,0,Math.PI*2);
+        x.fill();
+      }
+      x.globalAlpha=1;
+      const tex=new THREE.CanvasTexture(c);
+      tex.colorSpace=THREE.SRGBColorSpace;
+      return tex;
+    }
+
+    const artworks = Array.from({length:10},(_,i)=>makePaintingTexture(i));
+
+    function frameFor(tex, side, z, scale=1){
+      const g = new THREE.Group();
+      const frameW = 1.62*scale, frameH = 2.05*scale;
+      const artW = frameW*0.82, artH = frameH*0.82;
+
+      const frame = new THREE.Mesh(new THREE.BoxGeometry(frameW,frameH,.11), trimMat);
+      const art = new THREE.Mesh(new THREE.PlaneGeometry(artW,artH), new THREE.MeshBasicMaterial({map:tex}));
+      art.position.z = .061;
+
+      g.add(frame,art);
+      g.position.set(side*3.78, 2.18, z);
+      g.rotation.y = side===-1 ? Math.PI/2 : -Math.PI/2;
+      hall.add(g);
+
+      const light = new THREE.SpotLight(0xffd6a3, 3.2, 5.2, Math.PI/5, .68, 1.2);
+      light.position.set(side*2.95,3.75,z+.15);
+      light.target.position.set(side*3.76,2.05,z);
+      scene.add(light, light.target);
+
+      const pictureLight = new THREE.Mesh(new THREE.BoxGeometry(.55,.05,.05), trimMat);
+      pictureLight.position.set(side*3.65,3.43,z);
+      pictureLight.rotation.y = side===-1 ? Math.PI/2 : -Math.PI/2;
+      hall.add(pictureLight);
+    }
+
+    let z = 4;
+    artworks.forEach((tex,i)=>{
+      frameFor(tex, i%2===0 ? -1 : 1, z, i%3===0 ? 1.06 : .94);
+      z -= 5.2;
+    });
+
+    // End wall / feature frame
+    const endWall = new THREE.Mesh(new THREE.PlaneGeometry(7.8,4.4), wallMat);
+    endWall.position.set(0,2.2,-41); hall.add(endWall);
+
+    const endFrame = new THREE.Mesh(new THREE.BoxGeometry(3.25,2.55,.12), trimMat);
+    endFrame.position.set(0,2.25,-40.82);
+    hall.add(endFrame);
+    const endTex = makePaintingTexture(11);
+    const endArt = new THREE.Mesh(new THREE.PlaneGeometry(2.75,2.08), new THREE.MeshBasicMaterial({map:endTex}));
+    endArt.position.set(0,2.25,-40.75); hall.add(endArt);
+
+    const endSpot = new THREE.SpotLight(0xffd6a3, 4.8, 10, Math.PI/4,.62,1.2);
+    endSpot.position.set(0,4.05,-35); endSpot.target.position.set(0,2.2,-40.5);
+    scene.add(endSpot,endSpot.target);
+
+    // Warm pools of light
+    for(let z=6; z>-39; z-=8){
+      const p = new THREE.PointLight(0xffc98c, .72, 11, 2);
+      p.position.set(0,3.9,z); scene.add(p);
+    }
+
+    let start = performance.now();
+    const introDuration = 22000;
+    let targetYaw = 0, targetPitch = 0;
+    let userInfluence = 0;
+
+    function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+    function handlePointer(x,y){
+      targetYaw = ((x/innerWidth)-.5)*.18;
+      targetPitch = -((y/innerHeight)-.5)*.07;
+      userInfluence = 1;
+    }
+    addEventListener('pointermove', e=>handlePointer(e.clientX,e.clientY), {passive:true});
+    addEventListener('touchmove', e=>{
+      const t=e.touches[0]; if(t) handlePointer(t.clientX,t.clientY);
+    }, {passive:true});
+
+    if (window.DeviceOrientationEvent) {
+      addEventListener('deviceorientation', e=>{
+        if(e.gamma==null || e.beta==null) return;
+        targetYaw = clamp(e.gamma/90,-1,1)*.12;
+        targetPitch = clamp((e.beta-45)/90,-1,1)*.045;
+      }, {passive:true});
+    }
+
+    function easeInOut(t){return t<.5 ? 2*t*t : 1-Math.pow(-2*t+2,2)/2}
+
+    function animate(now){
+      requestAnimationFrame(animate);
+      const t = clamp((now-start)/introDuration,0,1);
+      const travel = easeInOut(t);
+      camera.position.z = 10.5 - travel*35.5;
+      camera.position.y = 1.72 + Math.sin(t*Math.PI)*.07;
+      camera.position.x += (Math.sin(now*.00026)*.045 + targetYaw - camera.position.x)*.018;
+
+      const baseYaw = Math.sin(now*.00018)*.018;
+      camera.rotation.y += ((baseYaw + targetYaw*.45)-camera.rotation.y)*.03;
+      camera.rotation.x += ((targetPitch*.55)-camera.rotation.x)*.03;
+
+      renderer.render(scene,camera);
+    }
+    requestAnimationFrame(animate);
+
+    setTimeout(()=>{
+      const overlay=document.getElementById('intro-overlay');
+      if(overlay) overlay.style.display='none';
+    },7200);
+
+    addEventListener('resize',()=>{
+      camera.aspect=innerWidth/innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth,innerHeight);
+    });
+  </script>
+</body>
+</html>
