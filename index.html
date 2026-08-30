@@ -1,50 +1,428 @@
 <!doctype html>
 <html lang="en">
-<head><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0">
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#213545">
 <title>V. Murphy Art Studio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Libre+Franklin:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#e8dfd0;color:#fff}body{font-family:"Libre Franklin",sans-serif}#stage{position:fixed;inset:0;background:#e8dfd0}canvas{position:absolute;inset:0;width:100%;height:100%;display:block}.shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(25,18,12,.16),transparent 28%,transparent 58%,rgba(20,16,12,.36));z-index:2}.intro{position:absolute;inset:0;z-index:6;display:grid;place-items:center;background:#203846;animation:introOut 5.5s ease forwards}.intro img{width:min(46vw,260px);height:auto;filter:none;animation:markIn 4.4s ease forwards}@keyframes markIn{0%{opacity:0;transform:scale(.84)}28%,72%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.97)}}@keyframes introOut{0%,76%{opacity:1}100%{opacity:0;visibility:hidden}}
-.topnav{position:absolute;z-index:8;left:5.5%;right:4.8%;top:max(24px,env(safe-area-inset-top));display:flex;align-items:center;gap:34px;opacity:0;pointer-events:none;transition:opacity 1.3s ease}.topnav.ready{opacity:1;pointer-events:auto}.topnav a{color:#fff;text-decoration:none;text-transform:uppercase;letter-spacing:.18em;font-size:clamp(9px,1.15vw,13px);text-shadow:0 1px 8px rgba(0,0,0,.4);white-space:nowrap}.topnav .enter{margin-left:auto;border:1px solid rgba(255,255,255,.85);padding:12px 20px;border-radius:999px}.hero{position:absolute;z-index:8;left:50%;bottom:max(42px,calc(env(safe-area-inset-bottom) + 24px));width:min(760px,88vw);transform:translateX(-50%);text-align:center;opacity:0;pointer-events:none;transition:opacity 1.5s ease}.hero.ready{opacity:1;pointer-events:auto}.hero h1{font:500 clamp(44px,6vw,76px)/.98 "Cormorant Garamond",serif;margin:0;text-shadow:0 2px 18px rgba(0,0,0,.28)}.rule{width:190px;height:1px;background:#d5b986;margin:26px auto 24px}.hero p{margin:0 auto 25px;max-width:650px;font-size:clamp(12px,1.45vw,16px);line-height:1.5;text-shadow:0 1px 10px rgba(0,0,0,.42)}.actions{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}.actions a{min-width:145px;padding:12px 18px;border:1px solid rgba(255,255,255,.82);border-radius:999px;color:#fff;text-decoration:none;text-transform:uppercase;letter-spacing:.13em;font-size:10px;background:rgba(25,22,18,.08);backdrop-filter:blur(2px)}.actions a.primary{background:#f4eddf;color:#26333a;border-color:#f4eddf}.tap{margin-top:30px;text-transform:uppercase;letter-spacing:.24em;font-size:10px}.chev{font-size:27px;line-height:1;margin-top:5px}.hint{position:absolute;z-index:9;right:20px;bottom:18px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.65);opacity:0;transition:opacity 1s}.hint.ready{opacity:1}
-@media(max-width:760px){.topnav{left:5%;right:5%;gap:0;justify-content:space-between;flex-wrap:wrap}.topnav a:not(.enter){display:none}.topnav .enter{margin-left:auto}.hero{bottom:max(28px,calc(env(safe-area-inset-bottom) + 12px));width:92vw}.hero h1{font-size:clamp(42px,12vw,62px)}.rule{width:120px;margin:18px auto}.hero p{font-size:12px;max-width:88%;margin-bottom:18px}.actions{gap:8px}.actions a{min-width:0;padding:10px 14px;font-size:9px}.tap{margin-top:18px}.hint{display:none}}
-</style></head>
-<body><main id="stage" data-build="vm-clean-3d-20260830-0756"><div class="shade"></div><div class="intro"><img src="vm-seal-staggered-transparent-v3.png" alt="V. Murphy Art Studio"></div>
-<nav class="topnav" id="nav"><a href="collection.html">Collection</a><a href="story.html">The Artist</a><a href="create.html">Create Your Own</a><a href="shop.html">Shop</a><a href="story.html">About</a><a href="contact.html">Contact</a><a class="enter" href="collection.html">Enter Gallery</a></nav>
-<section class="hero" id="hero"><h1>Walk into the collection.</h1><div class="rule"></div><p>Explore original V. Murphy works in a private gallery setting.<br>Tap a painting after the camera settles to inspect it more closely.</p><div class="actions"><a class="primary" href="collection.html">View Collection</a><a href="story.html">The Artist</a><a href="create.html">Create Your Own</a><a href="shop.html">Shop</a></div><div class="tap">Tap a painting to view it</div><div class="chev">⌄</div></section><div class="hint" id="hint">Drag gently to look around</div></main>
+:root{
+  --cream:#f4edde;
+  --warm:#c9a56b;
+  --navy:#213545;
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--navy);font-family:"Libre Franklin",sans-serif}
+#stage{position:fixed;inset:0;background:#d8d0c2}
+canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
+
+/* INTRO = the pale centre-panel look from the supplied reference */
+#intro{
+  position:absolute;inset:0;z-index:50;background:#d8d0c2;
+  display:grid;place-items:center;transition:opacity 2.2s ease;
+}
+#intro.hide{opacity:0;pointer-events:none}
+#intro .seal-wrap{
+  position:absolute;top:8%;left:50%;transform:translateX(-50%);
+  width:min(72vw,410px);opacity:.46;text-align:center;
+}
+#intro .seal-wrap img{display:block;width:100%;height:auto;filter:brightness(1.9) saturate(.3)}
+#intro .intro-copy{
+  position:absolute;left:50%;bottom:8.5%;transform:translateX(-50%);
+  width:min(760px,88vw);text-align:center;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.14)
+}
+#intro h1{font:500 clamp(46px,7vw,72px)/.96 "Cormorant Garamond",serif;margin:0}
+#intro .rule{width:145px;height:1px;background:var(--warm);margin:27px auto 27px}
+#intro p{margin:0 auto 25px;max-width:620px;font-size:14px;line-height:1.55;font-weight:300}
+.intro-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.intro-actions a{pointer-events:auto;text-decoration:none;text-transform:uppercase;letter-spacing:.16em;font-size:10px;color:#fff;border:1px solid rgba(255,255,255,.8);border-radius:999px;padding:12px 18px}
+.intro-actions a.primary{background:#f4ead5;color:#2c3b40;border-color:#f4ead5}
+#intro .enter{
+  position:absolute;right:5%;top:max(25px,env(safe-area-inset-top));
+  color:#fff;text-decoration:none;text-transform:uppercase;letter-spacing:.16em;font-size:11px;
+  border:1px solid rgba(255,255,255,.8);border-radius:999px;padding:11px 18px
+}
+
+/* FINAL HOME UI = copied spatially from user's target image */
+#ui{position:absolute;inset:0;z-index:20;pointer-events:none;color:#fff}
+#topnav{
+  position:absolute;top:max(27px,env(safe-area-inset-top));left:5.5%;right:3.2%;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  opacity:0;transition:opacity 1.4s ease;
+}
+#topnav.visible{opacity:1}
+#topnav .links{display:flex;align-items:center;gap:29px;flex-wrap:wrap}
+#topnav a{
+  pointer-events:auto;color:#fff;text-decoration:none;text-transform:uppercase;letter-spacing:.16em;
+  font-size:10px;font-weight:500;text-shadow:0 1px 8px rgba(0,0,0,.3)
+}
+#topnav .enter{
+  border:1px solid rgba(255,255,255,.8);border-radius:999px;padding:11px 18px;white-space:nowrap
+}
+#hero{
+  position:absolute;left:50%;bottom:4.7%;transform:translateX(-50%) translateY(12px);
+  width:min(780px,88vw);text-align:center;opacity:0;transition:opacity 1.5s ease,transform 1.5s ease;
+  text-shadow:0 2px 18px rgba(0,0,0,.28)
+}
+#hero.visible{opacity:1;transform:translateX(-50%) translateY(0)}
+#hero h1{font:500 clamp(47px,6.8vw,72px)/.98 "Cormorant Garamond",serif;margin:0}
+#hero .rule{width:145px;height:1px;background:var(--warm);margin:27px auto 27px}
+#hero p{margin:0 auto 27px;max-width:610px;font-size:14px;line-height:1.55;font-weight:300}
+.actions{display:flex;justify-content:center;gap:15px;flex-wrap:wrap}
+.actions a{
+  pointer-events:auto;min-width:145px;padding:12px 18px;border:1px solid rgba(255,255,255,.78);
+  border-radius:999px;color:#fff;text-decoration:none;text-transform:uppercase;letter-spacing:.15em;
+  font-size:10px;font-weight:500;background:rgba(28,30,29,.05);backdrop-filter:blur(2px)
+}
+.actions a.primary{background:#f4ead5;color:#28383e;border-color:#f4ead5;min-width:210px}
+.shop-row{margin-top:15px}
+#hint{margin-top:38px;text-transform:uppercase;letter-spacing:.25em;font-size:9px}
+#hint:after{content:"";display:block;width:18px;height:18px;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg);margin:10px auto 0}
+
+/* Artwork modal */
+#card{
+  position:absolute;z-index:80;left:50%;bottom:24px;transform:translate(-50%,22px);
+  width:min(92vw,430px);background:rgba(249,247,241,.98);color:#18313a;border-radius:17px;
+  padding:12px;box-shadow:0 18px 60px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:.25s ease
+}
+#card.visible{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+#card img{display:block;width:100%;max-height:46vh;object-fit:contain;border-radius:11px;background:#eee8dc}
+#card h2{font:600 1.55rem "Cormorant Garamond",serif;margin:10px 2px 4px}
+#card button{border:0;border-radius:999px;background:#d9d0bd;color:#17313b;padding:9px 14px}
+
+@media(max-width:720px){
+  #intro .seal-wrap{top:5%;width:min(78vw,360px)}
+  #intro .intro-copy{bottom:6.5%;width:91vw}
+  #intro h1{font-size:clamp(43px,11vw,58px)}
+  #intro p{font-size:12px;max-width:88%}
+  #intro .enter{right:5%;font-size:9px;padding:10px 13px}
+  #topnav{top:max(22px,env(safe-area-inset-top));left:4%;right:4%;align-items:flex-start}
+  #topnav .links{gap:12px;max-width:77%}
+  #topnav a{font-size:7.5px;letter-spacing:.12em}
+  #topnav .enter{font-size:8px;padding:9px 11px}
+  #hero{bottom:3.4%;width:92vw}
+  #hero h1{font-size:clamp(43px,10.6vw,58px)}
+  #hero .rule{margin:18px auto 20px;width:125px}
+  #hero p{font-size:11px;max-width:87%;margin-bottom:20px}
+  .actions{gap:8px}
+  .actions a{min-width:118px;font-size:8px;padding:10px 12px}
+  .actions a.primary{min-width:175px}
+  .shop-row{margin-top:9px}
+  #hint{margin-top:22px;font-size:7.5px}
+}
+</style>
+</head>
+<body>
+<main id="stage">
+  <div id="intro">
+    <a class="enter" href="collection.html">Enter Gallery</a>
+    <div class="seal-wrap"><img src="vm-seal-clean.png" alt=""></div>
+    <section class="intro-copy">
+      <h1>Walk into the collection.</h1>
+      <div class="rule"></div>
+      <p>Explore original V. Murphy works in a private gallery setting.<br>Tap a painting after the camera settles to inspect it more closely.</p>
+      <div class="intro-actions">
+        <a class="primary" href="collection.html">View Collection</a>
+        <a href="story.html">The Artist</a>
+        <a href="create.html">Create Your Own</a>
+        <a href="shop.html">Shop</a>
+      </div>
+    </section>
+  </div>
+
+  <div id="ui">
+    <nav id="topnav">
+      <div class="links">
+        <a href="collection.html">Collection</a>
+        <a href="story.html">The Artist</a>
+        <a href="create.html">Create Your Own</a>
+        <a href="shop.html">Shop</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <a class="enter" href="collection.html">Enter Gallery</a>
+    </nav>
+
+    <section id="hero">
+      <h1>Walk into the collection.</h1>
+      <div class="rule"></div>
+      <p>Explore original V. Murphy works in a private gallery setting.<br>Tap a painting after the camera settles to inspect it more closely.</p>
+      <div class="actions">
+        <a class="primary" href="collection.html">View Collection</a>
+        <a href="story.html">The Artist</a>
+        <a href="create.html">Create Your Own</a>
+      </div>
+      <div class="shop-row actions"><a href="shop.html">Shop</a></div>
+      <div id="hint">Tap a painting to view it</div>
+    </section>
+  </div>
+
+  <section id="card">
+    <img id="cardImage" src="" alt="">
+    <h2 id="cardTitle"></h2>
+    <button id="closeCard" type="button">Close</button>
+  </section>
+</main>
+
+<script>
+setTimeout(()=>document.getElementById('intro')?.classList.add('hide'),3800);
+setTimeout(()=>{const el=document.getElementById('intro');if(el)el.style.display='none'},6200);
+</script>
+
 <script type="module">
-import * as THREE from 'https://unpkg.com/three@0.170.0/build/three.module.js';
-const stage=document.getElementById('stage'),scene=new THREE.Scene();scene.background=new THREE.Color(0xe9dfcf);scene.fog=new THREE.Fog(0xe9dfcf,34,62);
-const camera=new THREE.PerspectiveCamera(48,innerWidth/innerHeight,.1,100);camera.position.set(0,1.62,14);
-const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.22;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;stage.prepend(renderer.domElement);
-const cream=new THREE.MeshStandardMaterial({color:0xe8dfd0,roughness:.9}),white=new THREE.MeshStandardMaterial({color:0xf4efe6,roughness:.86}),dark=new THREE.MeshStandardMaterial({color:0x242321,roughness:.7}),wood=new THREE.MeshStandardMaterial({color:0x3b2b20,roughness:.68}),gold=new THREE.MeshStandardMaterial({color:0x9f7b43,roughness:.48,metalness:.3}),floorMat=new THREE.MeshStandardMaterial({color:0xc9bca9,roughness:.55,metalness:.04});
-scene.add(new THREE.HemisphereLight(0xeef5ff,0x6d5844,2.2));const sun=new THREE.DirectionalLight(0xfff2d9,2.4);sun.position.set(-4,8,7);sun.castShadow=true;scene.add(sun);
-const hall=new THREE.Group();scene.add(hall);function box(w,h,d,mat,x,y,z){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);m.receiveShadow=true;m.castShadow=true;hall.add(m);return m}
-// pale stone floor and subtle tile joints
-box(9,.12,48,floorMat,0,-.06,-9);for(let z=13;z>-33;z-=2.2)box(9,.006,.018,dark,0,.01,z).material=new THREE.MeshStandardMaterial({color:0x9f9588,roughness:1});for(let x=-4.4;x<=4.4;x+=1.5)box(.018,.006,48,dark,x,.012,-9).material=new THREE.MeshStandardMaterial({color:0xa89d8f,roughness:1});
-box(.18,5.4,48,cream,-4.55,2.7,-9);box(.18,5.4,48,cream,4.55,2.7,-9);box(9.2,.18,48,white,0,5.4,-9);
-// end wall
-box(9.1,5.4,.18,cream,0,2.7,-32.8);
-// architectural dark columns and warm timber slats
-for(const z of [5,-8,-21]){box(.62,4.9,.62,dark,-3.35,2.45,z);box(.62,4.9,.62,dark,3.35,2.45,z)}
-for(let y=.55;y<4.8;y+=.22)box(.08,.12,3.4,wood,3.98,y,-19.5);
-// ceiling skylight, visible in settled view
-box(4.6,.12,8.2,white,0,5.26,-18);for(let x=-2.15;x<=2.15;x+=1.08)box(.09,.08,8.0,dark,x,5.17,-18);for(let z=-21.8;z<=-14.2;z+=1.55)box(4.5,.08,.09,dark,0,5.16,z);const sky=new THREE.Mesh(new THREE.PlaneGeometry(4.35,7.85),new THREE.MeshBasicMaterial({color:0xcfe1ee}));sky.rotation.x=Math.PI/2;sky.position.set(0,5.14,-18);hall.add(sky);
-// black track lighting
-for(const x of [-3.72,3.72]){box(.055,.055,38,dark,x,5.03,-8);for(let z=9;z>-28;z-=4.4){const lamp=box(.16,.28,.16,dark,x,4.84,z);lamp.rotation.x=.3;const sp=new THREE.SpotLight(0xffe4b5,2.4,7,Math.PI/7,.65,1.2);sp.position.set(x,4.72,z);sp.target.position.set(x>0?4.35:-4.35,2.2,z-1);scene.add(sp,sp.target)}}
-const loader=new THREE.TextureLoader(),artFiles=['courtyard-cafe.jpeg','blue-awnings.jpeg','village-garden-2013.jpeg','red-composition.jpeg','the-square-reference.jpeg'];const arts=artFiles.map(f=>loader.load(f));const clickable=[];
-function painting(tex,side,z,w=1.5,h=2){const g=new THREE.Group(),frame=new THREE.Mesh(new THREE.BoxGeometry(w+.18,h+.18,.11),side<0?gold:dark),art=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:tex}));art.position.z=.061;g.add(frame,art);g.position.set(side*4.42,2.35,z);g.rotation.y=side<0?Math.PI/2:-Math.PI/2;hall.add(g);clickable.push({mesh:art,url:'collection.html'});const bar=box(.55,.055,.055,dark,side*4.32,3.65,z);bar.rotation.y=side<0?Math.PI/2:-Math.PI/2;const sp=new THREE.SpotLight(0xffe0ad,3.5,4.6,Math.PI/6,.55,1.2);sp.position.set(side*3.82,3.58,z);sp.target.position.set(side*4.4,2.3,z);scene.add(sp,sp.target)}
-let zi=8;for(let i=0;i<10;i++){painting(arts[i%arts.length],i%2?-1:1,zi,i%3===0?1.55:1.32,i%3===0?2.05:1.75);zi-=4.1}
-// two end-wall paintings
-function endPainting(tex,x){const f=box(1.55,2.15,.12,gold,x,2.45,-32.55);const a=new THREE.Mesh(new THREE.PlaneGeometry(1.34,1.92),new THREE.MeshBasicMaterial({map:tex}));a.position.set(x,2.45,-32.47);hall.add(a);clickable.push({mesh:a,url:'collection.html'});const sp=new THREE.SpotLight(0xffe2b2,4.2,6,Math.PI/7,.55,1);sp.position.set(x,4.45,-29.7);sp.target.position.set(x,2.4,-32.5);scene.add(sp,sp.target)}endPainting(arts[1],-2.05);endPainting(arts[0],2.05);
-// ONE transparent VM seal on the physical rear wall. No backing panel.
-const sealTex=loader.load('vm-seal-staggered-transparent-v3.png');const sealMat=new THREE.MeshBasicMaterial({map:sealTex,transparent:true,depthWrite:false});const seal=new THREE.Mesh(new THREE.PlaneGeometry(2.05,2.05),sealMat);seal.position.set(0,2.65,-32.45);hall.add(seal);
-// bench
-box(1.45,.18,.48,dark,2.9,.62,-29.9);for(const x of [2.35,3.45])box(.12,.6,.12,dark,x,.3,-29.9);
-let start=performance.now(),settled=false,yaw=0,pitch=0,targetYaw=0,targetPitch=0;const duration=22000;function clamp(v,a,b){return Math.max(a,Math.min(b,v))}function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2}
-addEventListener('pointermove',e=>{if(!settled)return;targetYaw=((e.clientX/innerWidth)-.5)*.12;targetPitch=-((e.clientY/innerHeight)-.5)*.05},{passive:true});
-const ray=new THREE.Raycaster(),mouse=new THREE.Vector2();renderer.domElement.addEventListener('click',e=>{if(!settled)return;mouse.x=e.clientX/innerWidth*2-1;mouse.y=-(e.clientY/innerHeight)*2+1;ray.setFromCamera(mouse,camera);const hits=ray.intersectObjects(clickable.map(o=>o.mesh));if(hits.length)location.href='collection.html'});
-function animate(now){requestAnimationFrame(animate);const t=clamp((now-start)/duration,0,1),q=ease(t);camera.position.z=14-q*42.4;camera.position.y=1.62+Math.sin(t*Math.PI)*.06;camera.position.x=Math.sin(t*Math.PI*2)*.035;if(t>=1&&!settled){settled=true;document.getElementById('nav').classList.add('ready');document.getElementById('hero').classList.add('ready');document.getElementById('hint').classList.add('ready')}yaw+=(targetYaw-yaw)*.035;pitch+=(targetPitch-pitch)*.035;camera.rotation.y=yaw;camera.rotation.x=pitch;renderer.render(scene,camera)}requestAnimationFrame(animate);
-addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
-</script></body></html>
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js';
+
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0xcfc5b5);
+scene.fog=new THREE.Fog(0xd8d0c2,28,72);
+
+const camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,.1,100);
+camera.position.set(0,1.72,16.5);
+
+const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.55));
+renderer.setSize(innerWidth,innerHeight);
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.shadowMap.enabled=true;
+renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.08;
+document.getElementById('stage').prepend(renderer.domElement);
+
+const root=new THREE.Group();scene.add(root);
+const loader=new THREE.TextureLoader();
+const maxAniso=renderer.capabilities.getMaxAnisotropy();
+
+function canvasTex(w,h,draw){
+  const c=document.createElement('canvas');c.width=w;c.height=h;
+  const x=c.getContext('2d');draw(x,w,h);
+  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.wrapS=t.wrapT=THREE.RepeatWrapping;return t;
+}
+const plasterTex=canvasTex(512,512,(x,w,h)=>{
+  x.fillStyle='#e7dfd2';x.fillRect(0,0,w,h);
+  for(let i=0;i<2600;i++){let v=210+Math.random()*35;x.fillStyle=`rgba(${v},${v-4},${v-11},.06)`;x.fillRect(Math.random()*w,Math.random()*h,1+Math.random()*2,1+Math.random()*2)}
+});
+plasterTex.repeat.set(2,5);
+
+const stoneTex=canvasTex(512,512,(x,w,h)=>{
+  x.fillStyle='#bfb8ae';x.fillRect(0,0,w,h);
+  for(let i=0;i<120;i++){
+    x.strokeStyle=`rgba(${110+Math.random()*45},${105+Math.random()*40},${98+Math.random()*35},.12)`;
+    x.lineWidth=.5+Math.random()*1.5;x.beginPath();
+    let y=Math.random()*h;x.moveTo(-20,y);
+    x.bezierCurveTo(w*.3,y+Math.random()*80-40,w*.7,y+Math.random()*80-40,w+20,y+Math.random()*60-30);x.stroke()
+  }
+});
+stoneTex.repeat.set(4,16);
+
+const marbleTex=canvasTex(1024,1024,(x,w,h)=>{
+  x.fillStyle='#cfc6b8';x.fillRect(0,0,w,h);
+  for(let i=0;i<18;i++){
+    x.strokeStyle=`rgba(126,115,104,${.035+Math.random()*.05})`;x.lineWidth=.7+Math.random()*2;
+    x.beginPath();let y=Math.random()*h;x.moveTo(-50,y);
+    x.bezierCurveTo(w*.25,y+Math.random()*170-85,w*.7,y+Math.random()*170-85,w+50,y+Math.random()*110-55);x.stroke()
+  }
+});
+marbleTex.repeat.set(4,18);
+
+const woodTex=canvasTex(512,512,(x,w,h)=>{
+  x.fillStyle='#6e4b34';x.fillRect(0,0,w,h);
+  for(let i=0;i<75;i++){x.strokeStyle=`rgba(45,28,19,${.05+Math.random()*.08})`;x.lineWidth=1;x.beginPath();let xx=Math.random()*w;x.moveTo(xx,0);x.lineTo(xx+Math.random()*12-6,h);x.stroke()}
+});
+woodTex.repeat.set(1,6);
+
+const MAT={
+  wall:new THREE.MeshStandardMaterial({map:plasterTex,roughness:.94}),
+  stone:new THREE.MeshStandardMaterial({map:stoneTex,roughness:.86}),
+  marble:new THREE.MeshStandardMaterial({map:marbleTex,roughness:.58,metalness:.02}),
+  dark:new THREE.MeshStandardMaterial({color:0x171817,roughness:.62}),
+  bronze:new THREE.MeshStandardMaterial({color:0x8c6a42,roughness:.48,metalness:.35}),
+  wood:new THREE.MeshStandardMaterial({map:woodTex,roughness:.72}),
+  black:new THREE.MeshStandardMaterial({color:0x121313,roughness:.52}),
+  cream:new THREE.MeshStandardMaterial({color:0xf1ebe0,roughness:.92})
+};
+function box(w,h,d,m,x,y,z,cast=true){
+  const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);
+  o.castShadow=cast;o.receiveShadow=true;root.add(o);return o;
+}
+
+/* ROOM PROPORTIONS FROM THE USER'S REFERENCE */
+box(10.8,.12,52,MAT.marble,0,-.06,-10);
+box(.18,6.25,52,MAT.wall,-5.4,3.05,-10);
+box(.18,6.25,52,MAT.wall, 5.4,3.05,-10);
+box(10.8,.16,52,MAT.cream,0,6.1,-10);
+
+/* marble floor tile grid */
+const seamMat=new THREE.MeshBasicMaterial({color:0x9d958b,transparent:true,opacity:.24});
+for(let x=-5.0;x<=5.0;x+=1.35) box(.012,.012,52,seamMat,x,.012,-10,false);
+for(let z=15;z>-35;z-=2.15) box(10.2,.012,.016,seamMat,0,.014,z,false);
+
+/* dark stone columns and architectural returns */
+for(const side of [-1,1]){
+  const x=side*4.15;
+  box(.64,5.0,.75,MAT.dark,x,2.52,2.5);
+  box(.64,4.6,.75,MAT.dark,x,2.30,-7.5);
+}
+/* left arched opening approximation */
+box(.5,4.7,.4,MAT.wall,-3.25,2.35,-1.8);
+const arch=new THREE.Mesh(new THREE.TorusGeometry(.9,.24,20,48,Math.PI),MAT.wall);
+arch.rotation.z=Math.PI;arch.rotation.y=Math.PI/2;arch.position.set(-5.12,3.68,-1.8);root.add(arch);
+
+/* right vertical timber slat feature */
+box(.35,4.75,5.4,MAT.dark,4.92,2.45,-6.8);
+for(let z=-9.1;z<-4.4;z+=.24) box(.08,4.3,.07,MAT.wood,4.70,2.45,z);
+
+/* ceiling recess and skylight */
+box(7.6,.24,15.0,MAT.wall,0,5.78,-3.5);
+const skyMat=new THREE.MeshBasicMaterial({color:0xe8f2f7,toneMapped:false});
+const sky=new THREE.Mesh(new THREE.PlaneGeometry(5.0,10.2),skyMat);
+sky.rotation.x=Math.PI/2;sky.position.set(0,5.93,-2.5);root.add(sky);
+for(let x=-2.35;x<=2.35;x+=1.18) box(.11,.13,10.1,MAT.cream,x,5.91,-2.5,false);
+for(let z=-7.2;z<=2.2;z+=2.0) box(5.0,.13,.11,MAT.cream,0,5.91,z,false);
+
+/* black track rails and spot heads */
+for(const side of [-1,1]){
+  const x=side*3.55;
+  box(.045,.045,18.5,MAT.black,x,5.55,-2.0);
+  for(let z=4.7;z>-11;z-=3.1){
+    box(.10,.30,.10,MAT.black,x,5.35,z);
+    const head=new THREE.Mesh(new THREE.CylinderGeometry(.10,.13,.26,16),MAT.black);
+    head.rotation.x=Math.PI/2;head.position.set(x,5.12,z);root.add(head);
+    const sp=new THREE.SpotLight(0xffe0b7,2.1,8.5,Math.PI/8,.48,1.2);
+    sp.position.set(x,5.08,z);sp.target.position.set(side*4.9,2.7,z-.7);scene.add(sp,sp.target);
+  }
+}
+
+/* end wall */
+box(10.8,6.25,.22,MAT.wall,0,3.05,-24.8);
+
+/* end wall wash lights */
+for(const x of [-2.7,0,2.7]){
+  const p=new THREE.SpotLight(0xffe8c9,4.0,14,Math.PI/5,.5,1.15);
+  p.position.set(x,5.2,-18);p.target.position.set(x,2.6,-24.6);scene.add(p,p.target);
+}
+
+/* bench */
+box(1.8,.16,.55,MAT.dark,2.85,.52,-16.8);
+for(const x of [2.12,3.58]) box(.10,.68,.10,MAT.dark,x,.25,-16.8);
+
+/* artwork */
+const ART=[
+ {file:'red-composition.jpeg',title:'Red Composition'},
+ {file:'village-garden-2013.jpeg',title:'Village Garden, 2013'},
+ {file:'courtyard-cafe.jpeg',title:'Courtyard Café'},
+ {file:'blue-awnings.jpeg',title:'Blue Awnings'}
+];
+const clickables=[];
+function artwork(item,side,z,w=1.55,h=2.05,frame='black'){
+  const frameMat=frame==='bronze'?MAT.bronze:MAT.black;
+  const g=new THREE.Group();
+  const f=new THREE.Mesh(new THREE.BoxGeometry(w,h,.16),frameMat);f.castShadow=true;g.add(f);
+  const mount=new THREE.Mesh(new THREE.PlaneGeometry(w*.88,h*.88),new THREE.MeshBasicMaterial({color:0xf5f0e7,toneMapped:false}));
+  mount.position.z=.083;g.add(mount);
+  const tex=loader.load(item.file);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=maxAniso;
+  const a=new THREE.Mesh(new THREE.PlaneGeometry(w*.78,h*.78),new THREE.MeshBasicMaterial({map:tex,toneMapped:false}));
+  a.position.z=.089;a.userData.item=item;g.add(a);clickables.push(a);
+  g.position.set(side*5.24,2.68,z);g.rotation.y=side===-1?Math.PI/2:-Math.PI/2;root.add(g);
+  /* brass picture light */
+  box(.07,.055,.58,MAT.bronze,side*4.91,4.07,z,false);
+  const spot=new THREE.SpotLight(0xffe1ba,4.2,6.5,Math.PI/7,.52,1.15);
+  spot.position.set(side*4.65,4.02,z);spot.target.position.set(side*5.22,2.65,z);scene.add(spot,spot.target);
+}
+artwork(ART[0],-1,5.0,1.65,2.15,'black');
+artwork(ART[1], 1,4.2,1.75,2.25,'black');
+artwork(ART[2],-1,-9.6,1.55,2.10,'bronze');
+artwork(ART[3], 1,-9.6,1.55,2.10,'bronze');
+
+/* two end-wall paintings */
+function endArt(item,x,frameMat){
+  const w=1.55,h=2.08;
+  box(w,h,.16,frameMat,x,2.72,-24.62);
+  const mount=new THREE.Mesh(new THREE.PlaneGeometry(w*.88,h*.88),new THREE.MeshBasicMaterial({color:0xf5f0e7,toneMapped:false}));
+  mount.position.set(x,2.72,-24.52);root.add(mount);
+  const tex=loader.load(item.file);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=maxAniso;
+  const a=new THREE.Mesh(new THREE.PlaneGeometry(w*.78,h*.78),new THREE.MeshBasicMaterial({map:tex,toneMapped:false}));
+  a.position.set(x,2.72,-24.47);a.userData.item=item;root.add(a);clickables.push(a);
+  box(.52,.055,.06,MAT.bronze,x,4.02,-24.28,false);
+  const sp=new THREE.SpotLight(0xffdfb2,5.0,9,Math.PI/8,.5,1.1);
+  sp.position.set(x,4.1,-19.5);sp.target.position.set(x,2.7,-24.5);scene.add(sp,sp.target);
+}
+endArt(ART[2],-2.4,MAT.bronze);
+endArt(ART[3], 2.4,MAT.bronze);
+
+/* ONE seal only on the end wall — no panel, no duplicate */
+const sealTex=loader.load('vm-seal-clean.png');sealTex.colorSpace=THREE.SRGBColorSpace;
+const seal=new THREE.Mesh(
+  new THREE.PlaneGeometry(2.15,2.15),
+  new THREE.MeshBasicMaterial({map:sealTex,transparent:true,alphaTest:.03,toneMapped:false,opacity:.95})
+);
+seal.position.set(0,2.95,-24.50);root.add(seal);
+
+/* lighting */
+scene.add(new THREE.HemisphereLight(0xfff8ec,0x69635f,1.55));
+const sun=new THREE.DirectionalLight(0xfff1d4,1.75);sun.position.set(-4,9,8);sun.castShadow=true;scene.add(sun);
+for(const x of [-4.7,4.7]){
+  const p=new THREE.PointLight(0xffd8aa,.55,9,2);p.position.set(x,.28,-1.0);scene.add(p);
+}
+
+/* cinematic camera */
+const start=performance.now();
+let interactive=false, yaw=0, pitch=0;
+const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();
+function ease(t){return t*t*(3-2*t)}
+function animate(now){
+  requestAnimationFrame(animate);
+  const s=(now-start)/1000;
+  let z=16.5;
+  if(s>=4 && s<18) z=16.5-ease((s-4)/14)*5.6;
+  else if(s>=18 && s<22) z=10.9-ease((s-18)/4)*1.7;
+  else if(s>=22) z=9.2+Math.sin(s*.21)*.025;
+  camera.position.z=z;
+  camera.position.y=1.72+(s>4&&s<22?Math.sin(s*.55)*.018:0);
+  camera.position.x=s<22?Math.sin(s*.25)*.025:yaw*.20;
+  camera.rotation.y+=((s<22?Math.sin(s*.18)*.006:yaw)-camera.rotation.y)*.03;
+  camera.rotation.x+=((s<22?0:pitch)-camera.rotation.x)*.03;
+
+  if(s>=20&&!interactive){
+    interactive=true;
+    document.getElementById('topnav').classList.add('visible');
+    document.getElementById('hero').classList.add('visible');
+  }
+  renderer.render(scene,camera);
+}
+requestAnimationFrame(animate);
+
+function look(x,y){
+  if(!interactive)return;
+  yaw=((x/innerWidth)-.5)*.09;
+  pitch=-((y/innerHeight)-.5)*.032;
+}
+addEventListener('pointermove',e=>look(e.clientX,e.clientY),{passive:true});
+addEventListener('touchmove',e=>{const t=e.touches[0];if(t)look(t.clientX,t.clientY)},{passive:true});
+
+renderer.domElement.addEventListener('pointerup',e=>{
+  if(!interactive)return;
+  pointer.x=e.clientX/innerWidth*2-1;
+  pointer.y=-(e.clientY/innerHeight)*2+1;
+  raycaster.setFromCamera(pointer,camera);
+  const hit=raycaster.intersectObjects(clickables,false)[0];
+  if(!hit)return;
+  const item=hit.object.userData.item;
+  document.getElementById('cardImage').src=item.file;
+  document.getElementById('cardImage').alt=item.title;
+  document.getElementById('cardTitle').textContent=item.title;
+  document.getElementById('card').classList.add('visible');
+});
+document.getElementById('closeCard').addEventListener('click',()=>document.getElementById('card').classList.remove('visible'));
+
+addEventListener('resize',()=>{
+  camera.aspect=innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+});
+</script>
+</body>
+</html>
