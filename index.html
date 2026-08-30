@@ -10,17 +10,17 @@
 <style>
 :root{--cream:#f2ead8;--ink:#17313b;--gold:#b8935f;--wine:#6a303c}
 *{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050809;color:var(--cream)}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#213545;color:var(--cream)}
 body{font-family:"Libre Franklin",sans-serif}
-#stage{position:fixed;inset:0;background:#050809}
+#stage{position:fixed;inset:0;background:#213545}
 canvas{display:block;width:100%;height:100%}
-#fade{position:absolute;inset:0;z-index:30;background:#020304;pointer-events:none;opacity:1;transition:opacity 3s ease}
+#fade{position:absolute;inset:0;z-index:30;background:#213545;pointer-events:none;opacity:1;transition:opacity 3s ease}
 #sealIntro{position:absolute;inset:0;z-index:35;display:grid;place-items:center;pointer-events:none}
 #sealIntro .mark{display:flex;flex-direction:column;align-items:center;gap:16px;opacity:0;transform:scale(.86);
 animation:sealLife 6s ease forwards}
-#sealIntro img{width:min(34vw,170px);height:min(34vw,170px);border-radius:50%;object-fit:cover;
-box-shadow:0 0 0 1px rgba(242,234,216,.55),0 16px 55px rgba(0,0,0,.45)}
-#sealIntro span{font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;color:#efe7d3}
+#sealIntro img{width:min(72vw,420px);height:auto;border-radius:0;object-fit:contain;
+box-shadow:none}
+#sealIntro span{font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;color:#efe7d3;margin-top:-6px}
 @keyframes sealLife{0%{opacity:0;transform:scale(.86)}18%{opacity:1;transform:scale(1)}64%{opacity:1}100%{opacity:0;transform:scale(.96)}}
 #curtain{position:absolute;inset:0;z-index:20;pointer-events:none;background:
 radial-gradient(circle at 50% 46%,transparent 0 34%,rgba(8,10,11,.12) 62%,rgba(2,3,4,.55) 100%)}
@@ -198,6 +198,37 @@ for(const x of [-3.6,3.6]){
   box(.7,.12,.7,gold,x,4.9,-48.4);
 }
 
+// Central navy feature panel with the exact approved staggered VM seal.
+const featurePanelMat=new THREE.MeshStandardMaterial({color:0x213545,roughness:.82});
+box(4.15,4.45,.16,featurePanelMat,0,2.55,-48.72);
+const vmTex=loader.load('vm-seal.png');
+vmTex.colorSpace=THREE.SRGBColorSpace;
+const vmSealWall=new THREE.Mesh(
+  new THREE.PlaneGeometry(3.45,2.25),
+  new THREE.MeshBasicMaterial({map:vmTex,toneMapped:false})
+);
+vmSealWall.position.set(0,3.0,-48.60);
+root.add(vmSealWall);
+
+// Cream ART STUDIO inscription below the physical seal panel.
+const labelCanvas=document.createElement('canvas');
+labelCanvas.width=1200;labelCanvas.height=220;
+const lc=labelCanvas.getContext('2d');
+lc.clearRect(0,0,labelCanvas.width,labelCanvas.height);
+lc.fillStyle='#efe7d3';
+lc.font='52px Arial';
+lc.textAlign='center';
+lc.letterSpacing='18px';
+lc.fillText('—  A R T   S T U D I O  —',600,125);
+const labelTex=new THREE.CanvasTexture(labelCanvas);
+labelTex.colorSpace=THREE.SRGBColorSpace;
+const labelMesh=new THREE.Mesh(
+  new THREE.PlaneGeometry(3.5,.64),
+  new THREE.MeshBasicMaterial({map:labelTex,transparent:true,toneMapped:false})
+);
+labelMesh.position.set(0,1.52,-48.59);
+root.add(labelMesh);
+
 const loader=new THREE.TextureLoader();
 const ART=[
  {file:'courtyard-cafe.jpeg',title:'Courtyard Café'},
@@ -253,17 +284,23 @@ for(let i=0;i<10;i++){
   zi-=5.2;
 }
 
-// Feature painting at the principal gallery.
-const feature=shuffled[0];
-const featureFrame=box(4.35,3.25,.22,gold,0,2.85,-48.7);
-const featureTex=loader.load(feature.file);featureTex.colorSpace=THREE.SRGBColorSpace;featureTex.anisotropy=renderer.capabilities.getMaxAnisotropy();
-const featureMount=new THREE.Mesh(new THREE.PlaneGeometry(3.85,2.75),new THREE.MeshBasicMaterial({color:0xf3eee1,toneMapped:false}));
-featureMount.position.set(0,2.85,-48.56);root.add(featureMount);
-const featureArt=new THREE.Mesh(new THREE.PlaneGeometry(3.52,2.42),new THREE.MeshBasicMaterial({map:featureTex,toneMapped:false}));
-featureArt.position.set(0,2.85,-48.52);featureArt.userData={item:feature};root.add(featureArt);galleryWorks.push(featureArt);
+// Two principal paintings flank the VM seal.
+function endArtwork(item,x,frameMat){
+  const fw=2.05,fh=2.65;
+  const frame=box(fw,fh,.20,frameMat,x,2.78,-48.62);
+  const mount=new THREE.Mesh(new THREE.PlaneGeometry(fw*.88,fh*.88),new THREE.MeshBasicMaterial({color:0xf3eee1,toneMapped:false}));
+  mount.position.set(x,2.78,-48.49);root.add(mount);
+  const tex=loader.load(item.file);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=renderer.capabilities.getMaxAnisotropy();
+  const art=new THREE.Mesh(new THREE.PlaneGeometry(fw*.78,fh*.78),new THREE.MeshBasicMaterial({map:tex,toneMapped:false}));
+  art.position.set(x,2.78,-48.45);art.userData={item};root.add(art);galleryWorks.push(art);
+  const spot=new THREE.SpotLight(0xffdfad,6.2,10,Math.PI/7,.5,1.15);
+  spot.position.set(x,4.75,-42.2);spot.target.position.set(x,2.7,-48.4);scene.add(spot,spot.target);
+}
+endArtwork(shuffled[0],-3.0,gold);
+endArtwork(shuffled[1],3.0,darkWood);
 
-const endLight=new THREE.SpotLight(0xffdfad,7,12,Math.PI/5,.56,1.15);
-endLight.position.set(0,4.95,-41.5);endLight.target.position.set(0,2.75,-48.5);scene.add(endLight,endLight.target);
+const sealLight=new THREE.SpotLight(0xffe7c2,4.2,10,Math.PI/5,.58,1.1);
+sealLight.position.set(0,4.8,-42.0);sealLight.target.position.set(0,2.8,-48.5);scene.add(sealLight,sealLight.target);
 
 const raycaster=new THREE.Raycaster();
 const pointer=new THREE.Vector2();
