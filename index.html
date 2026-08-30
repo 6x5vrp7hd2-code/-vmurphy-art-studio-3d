@@ -104,6 +104,102 @@ canvas{position:absolute;inset:0;z-index:1}
 #galleryFallback .fb-left::after{right:10%}
 #galleryFallback .fb-right::after{left:10%}
 
+
+/* v2.5 architectural gallery */
+#galleryFallback{
+  background:#e9e4da!important;
+  perspective:1100px;
+}
+#galleryFallback .fb-ceiling{
+  left:13%;right:13%;top:0;height:31%;
+  background:
+    repeating-linear-gradient(90deg,rgba(88,72,57,.38) 0 3px,transparent 3px 15%),
+    repeating-linear-gradient(0deg,rgba(88,72,57,.28) 0 3px,transparent 3px 34%),
+    linear-gradient(#f5f2eb,#ded8cd)!important;
+  clip-path:polygon(18% 0,82% 0,100% 100%,0 100%);
+  box-shadow:inset 0 -18px 28px rgba(72,55,40,.12);
+}
+#galleryFallback .fb-floor{
+  left:0;right:0;bottom:0;height:48%;
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0 1px,transparent 1px 74px),
+    repeating-linear-gradient(0deg,#704c34 0 9px,#7d573c 9px 18px,#68462f 18px 27px)!important;
+  clip-path:polygon(29% 0,71% 0,100% 100%,0 100%);
+  box-shadow:inset 0 24px 45px rgba(35,22,15,.25);
+}
+#galleryFallback .fb-left,#galleryFallback .fb-right{
+  top:0;bottom:0;width:46%;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.13),transparent 22%),
+    linear-gradient(#d9d2c6 0 66%,#4a4039 66% 68%,#d8d0c4 68% 100%)!important;
+}
+#galleryFallback .fb-left{clip-path:polygon(0 0,100% 28%,70% 100%,0 100%)}
+#galleryFallback .fb-right{clip-path:polygon(0 28%,100% 0,100% 100%,30% 100%)}
+#galleryFallback .fb-end{
+  left:35%;right:35%;top:26%;bottom:29%;
+  background:linear-gradient(145deg,#d8d0c3,#eee9df)!important;
+  box-shadow:inset 0 0 0 2px rgba(85,68,54,.12),0 0 28px rgba(0,0,0,.10)!important;
+  display:grid;place-items:center;
+}
+#galleryFallback .fb-left::before,#galleryFallback .fb-right::before{
+  top:30%;width:29%;height:25%;
+  background:
+    linear-gradient(145deg,#e9d8b0,#b68b52) padding-box,
+    linear-gradient(135deg,#7a552c,#d8b66c,#5d3b1e) border-box!important;
+  border:10px solid transparent!important;
+  box-shadow:0 10px 24px rgba(0,0,0,.24)!important;
+}
+#galleryFallback .fb-left::after,#galleryFallback .fb-right::after{
+  top:61%;width:25%;height:18%;
+  background:#efe8da!important;
+  border:9px solid #352b25!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.22)!important;
+}
+.architectural-mark{
+  position:relative;width:150px;height:150px;color:#8b7350;
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Cormorant Garamond",Georgia,serif;
+}
+.architectural-mark:before,.architectural-mark:after{
+  content:"";position:absolute;border:1px solid #9d8869;border-radius:50%;
+  inset:11px;
+}
+.architectural-mark:after{inset:24px}
+.architectural-mark .vm-v{font-size:64px;transform:translate(-8px,-5px)}
+.architectural-mark .vm-m{font-size:55px;transform:translate(-22px,16px)}
+.architectural-mark i{
+  position:absolute;left:21px;right:21px;bottom:-7px;height:1px;background:#9d8869;
+}
+.architectural-mark b{
+  position:absolute;bottom:-28px;left:0;right:0;text-align:center;
+  font:500 9px/1 Arial,sans-serif;letter-spacing:.38em;padding-left:.38em;
+}
+/* Keep the post-cinematic interface subordinate to the gallery */
+#bottomUI.visible{
+  background:linear-gradient(180deg,transparent,rgba(21,27,30,.68))!important;
+}
+#bottomUI .hero-copy,#bottomUI h1,#bottomUI p{
+  max-width:520px;
+}
+@media(max-width:700px){
+  #bottomUI h1{font-size:clamp(2.1rem,9vw,3.4rem)!important;line-height:.94!important}
+  #bottomUI p{font-size:.98rem!important;line-height:1.45!important;max-width:88vw}
+  #bottomUI{padding-bottom:max(24px,env(safe-area-inset-bottom))!important}
+}
+
+
+#wallBrand{
+  position:absolute;z-index:4;left:50%;top:37%;transform:translate(-50%,-50%);
+  opacity:0;pointer-events:none;transition:opacity 1.8s ease;
+  filter:drop-shadow(0 2px 2px rgba(0,0,0,.12));
+}
+#wallBrand.visible{opacity:.82}
+#wallBrand .architectural-mark{transform:scale(.72)}
+@media(max-width:700px){
+  #wallBrand{top:35%}
+  #wallBrand .architectural-mark{transform:scale(.56)}
+}
+
 </style>
 </head>
 <body>
@@ -114,7 +210,7 @@ canvas{position:absolute;inset:0;z-index:1}
     <div class="fb-left"></div>
     <div class="fb-right"></div>
     <div class="fb-floor"></div>
-    <div class="fb-end"><img src="vm-seal-clean-transparent-v4.png" alt=""></div>
+    <div class="fb-end"><div class="architectural-mark"><span class="vm-v">V</span><span class="vm-m">M</span><i></i><b>ART STUDIO</b></div></div>
   </div>
 
   <div id="fade"></div>
@@ -137,7 +233,14 @@ canvas{position:absolute;inset:0;z-index:1}
       </div>
     </div>
   </div>
-  <div id="hint">Tap a painting to view it</div>
+  
+<div id="wallBrand" aria-hidden="true">
+  <div class="architectural-mark">
+    <span class="vm-v">V</span><span class="vm-m">M</span><i></i><b>ART STUDIO</b>
+  </div>
+</div>
+
+<div id="hint">Tap a painting to view it</div>
   <section id="artCard" aria-live="polite">
     <img id="cardImage" src="" alt="">
     <div class="copy">
@@ -158,6 +261,7 @@ canvas{position:absolute;inset:0;z-index:1}
   setTimeout(()=>{ if(intro) intro.style.display='none'; }, 6500);
   // If 3D fails, reveal the fallback UI after the cinematic intro.
   setTimeout(()=>{
+    document.getElementById('wallBrand')?.classList.add('visible');
     document.getElementById('topUI')?.classList.add('visible');
     document.getElementById('bottomUI')?.classList.add('visible');
     document.getElementById('hint')?.classList.add('visible');
