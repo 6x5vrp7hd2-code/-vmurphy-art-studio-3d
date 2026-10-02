@@ -231,6 +231,7 @@ marbleTex.repeat.set(4,18);
 const woodTex=canvasTex(512,512,(x,w,h)=>{
   x.fillStyle='#6e4b34';x.fillRect(0,0,w,h);
   for(let i=0;i<75;i++){x.strokeStyle=`rgba(45,28,19,${.05+Math.random()*.08})`;x.lineWidth=1;x.beginPath();let xx=Math.random()*w;x.moveTo(xx,0);x.lineTo(xx+Math.random()*12-6,h);x.stroke()}
+  
 });
 woodTex.repeat.set(1,6);
 
